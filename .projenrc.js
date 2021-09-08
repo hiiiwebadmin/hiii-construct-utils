@@ -5,7 +5,7 @@ const project = new AwsCdkConstructLibrary({
   cdkVersion: '1.95.2',
   defaultReleaseBranch: 'main',
   name: 'hiii-construct-utils',
-  repositoryUrl: 'https://github.com/hiiiwebadmin/hiii-construct-util.git',
+  repositoryUrl: 'https://github.com/hiiiwebadmin/hiii-construct-utils.git',
   description: 'Aws CDK Construct Util Designed For Hiii.',
   deps: [
     '@aws-cdk/core',

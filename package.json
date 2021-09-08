@@ -3,7 +3,7 @@
   "description": "Aws CDK Construct Util Designed For Hiii.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hiiiwebadmin/hiii-construct-util.git"
+    "url": "https://github.com/hiiiwebadmin/hiii-construct-utils.git"
   },
   "scripts": {
     "clobber": "npx projen clobber",
