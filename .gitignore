@@ -49,4 +49,9 @@ junit.xml
 .jsii
 tsconfig.json
 !/API.md
+cdk.out
+cdk.context.json
+yarn-error.log
+dependabot.yml
+website/public
 !/.github/workflows/release.yml

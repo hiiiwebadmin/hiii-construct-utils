@@ -1,8 +1,9 @@
 {
   "name": "hiii-construct-utils",
+  "description": "Aws CDK Construct Util Designed For Hiii.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/user/hiii-construct-utils.git"
+    "url": "https://github.com/hiiiwebadmin/hiii-construct-util.git"
   },
   "scripts": {
     "clobber": "npx projen clobber",
@@ -28,14 +29,14 @@
     "projen": "npx projen"
   },
   "author": {
-    "name": "user",
-    "email": "user@domain.com",
+    "name": "Ken",
+    "email": "ken@hiii.com.tw",
     "organization": false
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.95.2",
     "@types/jest": "^27.0.1",
-    "@types/node": "^10.17.0",
+    "@types/node": "^12.20.0",
     "@typescript-eslint/eslint-plugin": "^4.31.0",
     "@typescript-eslint/parser": "^4.31.0",
     "eslint": "^7.32.0",
@@ -56,12 +57,42 @@
     "typescript": "^4.4.2"
   },
   "peerDependencies": {
+    "@aws-cdk/aws-certificatemanager": "^1.121.0",
+    "@aws-cdk/aws-cloudformation": "^1.121.0",
+    "@aws-cdk/aws-ec2": "^1.121.0",
+    "@aws-cdk/aws-ecr": "^1.121.0",
+    "@aws-cdk/aws-ecs": "^1.121.0",
+    "@aws-cdk/aws-ecs-patterns": "^1.121.0",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^1.121.0",
+    "@aws-cdk/aws-rds": "^1.121.0",
+    "@aws-cdk/aws-route53": "^1.121.0",
+    "@aws-cdk/aws-s3": "^1.121.0",
+    "@aws-cdk/aws-secretsmanager": "^1.121.0",
+    "@aws-cdk/core": "^1.121.0",
     "constructs": "^3.2.27"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-certificatemanager": "^1.121.0",
+    "@aws-cdk/aws-cloudformation": "^1.121.0",
+    "@aws-cdk/aws-ec2": "^1.121.0",
+    "@aws-cdk/aws-ecr": "^1.121.0",
+    "@aws-cdk/aws-ecs": "^1.121.0",
+    "@aws-cdk/aws-ecs-patterns": "^1.121.0",
+    "@aws-cdk/aws-elasticloadbalancingv2": "^1.121.0",
+    "@aws-cdk/aws-rds": "^1.121.0",
+    "@aws-cdk/aws-route53": "^1.121.0",
+    "@aws-cdk/aws-s3": "^1.121.0",
+    "@aws-cdk/aws-secretsmanager": "^1.121.0",
+    "@aws-cdk/core": "^1.121.0"
   },
   "bundledDependencies": [],
   "keywords": [
-    "cdk"
+    "cdk",
+    "hiii"
   ],
+  "engines": {
+    "node": ">= 12.20.0"
+  },
   "main": "lib/index.js",
   "license": "Apache-2.0",
   "version": "0.0.0",
