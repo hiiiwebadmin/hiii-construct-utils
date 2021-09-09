@@ -114,7 +114,31 @@
       "type": "peer"
     },
     {
+      "name": "@aws-cdk/aws-efs",
+      "type": "peer"
+    },
+    {
       "name": "@aws-cdk/aws-elasticloadbalancingv2",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-events",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-events-targets",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-iam",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-lambda",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-logs",
       "type": "peer"
     },
     {
@@ -123,6 +147,10 @@
     },
     {
       "name": "@aws-cdk/aws-route53",
+      "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-route53-targets",
       "type": "peer"
     },
     {
@@ -167,7 +195,31 @@
       "type": "runtime"
     },
     {
+      "name": "@aws-cdk/aws-efs",
+      "type": "runtime"
+    },
+    {
       "name": "@aws-cdk/aws-elasticloadbalancingv2",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-events",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-events-targets",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-iam",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-lambda",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-logs",
       "type": "runtime"
     },
     {
@@ -176,6 +228,10 @@
     },
     {
       "name": "@aws-cdk/aws-route53",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-route53-targets",
       "type": "runtime"
     },
     {
