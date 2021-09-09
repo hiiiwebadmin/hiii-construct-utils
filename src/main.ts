@@ -216,7 +216,7 @@ export abstract class BaseFargateService extends cdk.Construct {
   protected zoneName: string = '';
   protected hasExternalLoadBalancer: boolean = false;
   protected hasInternalLoadBalancer: boolean = false;
-  protected vpcSubnets: ec2.SubnetSelection = { subnetType: ec2.SubnetType.PRIVATE };
+  protected vpcSubnets: ec2.SubnetSelection = { subnetType: ec2.SubnetType.PRIVATE_WITH_NAT };
   protected enableLoadBalancerAlias: boolean;
   private hasSpotCapacity: boolean = false;
   /**
