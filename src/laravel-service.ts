@@ -39,11 +39,11 @@ export interface LaravelProps {
    */
   readonly efsFileSystem?: efs.FileSystemProps;
 
+  readonly db?: RdsService;
 }
 
 export class LaravelService extends cdk.Construct {
   readonly vpc: ec2.IVpc;
-  readonly db?: RdsService;
   readonly svc: DualAlbFargateService;
   constructor(scope: cdk.Construct, id: string, props: LaravelProps) {
     super(scope, id);
@@ -63,24 +63,24 @@ export class LaravelService extends cdk.Construct {
     task.addContainer('Laravel', {
       image: ecs.ContainerImage.fromAsset(props.code),
       portMappings: [{ containerPort: props.containerPort ?? 80 }],
-      environment: this.db ? {
+      environment: props.db ? {
         Laravel_DB_NAME: 'Laravel',
       } : {},
       logging: new ecs.AwsLogDriver({
         streamPrefix: 'Laravel-Service',
         logGroup,
       }),
-      secrets: this.db ? {
+      secrets: props.db ? {
         LARAVEL_DB_HOST: ecs.Secret.fromSecretsManager(
-          this.db.secret,
+          props.db.secret,
           'host',
         ),
         LARAVEL_DB_USER: ecs.Secret.fromSecretsManager(
-          this.db.secret,
+          props.db.secret,
           'username',
         ),
         LARAVEL_DB_PASSWORD: ecs.Secret.fromSecretsManager(
-          this.db.secret,
+          props.db.secret,
           'password',
         ),
       } : {},

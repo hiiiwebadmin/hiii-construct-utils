@@ -225,12 +225,6 @@ new LaravelService(scope: Construct, id: string, props: LaravelProps)
 
 ---
 
-##### `db`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelService.property.db"></a>
-
-- *Type:* [`hiii-construct-utils.RdsService`](#hiii-construct-utils.RdsService)
-
----
-
 
 ### RdsService <a name="hiii-construct-utils.RdsService"></a>
 
@@ -896,6 +890,12 @@ The loadbalancer accessibility for the service.
 - *Default:* 80
 
 The Laravel container port.
+
+---
+
+##### `db`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.db"></a>
+
+- *Type:* [`hiii-construct-utils.RdsService`](#hiii-construct-utils.RdsService)
 
 ---
 
