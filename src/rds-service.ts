@@ -2,7 +2,7 @@ import * as ec2 from '@aws-cdk/aws-ec2';
 import * as rds from '@aws-cdk/aws-rds';
 import * as secretsmanager from '@aws-cdk/aws-secretsmanager';
 import * as cdk from '@aws-cdk/core';
-import { printOutput } from './common/util';
+import { printOutput, getOrCreateVpc } from './common/util';
 
 export interface RdsServiceProps {
   readonly cluster: Boolean;
@@ -10,7 +10,7 @@ export interface RdsServiceProps {
   // readonly version: rds.AuroraMysqlEngineVersion,
   // readonly version: rds.MariaDbEngineVersion,
   readonly username: string;
-  readonly vpc: ec2.IVpc;
+  readonly vpc?: ec2.IVpc;
   // readonly vpcSubnetType: ec2.SubnetType,
   readonly securityGroup?: ec2.ISecurityGroup[];
   readonly databaseName?: string;
@@ -45,6 +45,7 @@ export class RdsService extends cdk.Construct {
   constructor(scope: cdk.Construct, id: string, props: RdsServiceProps) {
     super(scope, id);
     var config = null;
+
     if (props.cluster) {
       config = this._createRdsCluster(props);
     } else {
@@ -56,16 +57,16 @@ export class RdsService extends cdk.Construct {
     this.clusterIdentifier = config.identifier;
     this.connections = config.connections;
 
-
     printOutput(this, 'HiiiDBSecretArn - ', config.secret.secretArn);
-    printOutput(this, 'HiiiDBSecretValue - ', config.secret.secretValue.toJSON());
     printOutput(this, 'HiiiClusterEndpointHostname - ', this.clusterEndpointHostname);
     printOutput(this, 'HiiiClusterIdentifier - ', this.clusterIdentifier);
   }
 
   private _createRdsInstance(props: RdsServiceProps): DatabaseCofig {
+    const vpc = props.vpc ? props.vpc : getOrCreateVpc(this);
+
     const dbInstance = new rds.DatabaseInstance(this, 'HiiiDbInstance', {
-      vpc: props.vpc,
+      vpc: vpc,
       vpcSubnets: {
         subnetType: ec2.SubnetType.PUBLIC,
       },
@@ -74,7 +75,7 @@ export class RdsService extends cdk.Construct {
       databaseName: props.databaseName,
       //cluster 最小 t3.MICRO
       instanceType: ec2.InstanceType.of(ec2.InstanceClass.T3, ec2.InstanceSize.MICRO),
-      securityGroups: props.securityGroup,
+      securityGroups: props.securityGroup ? props.securityGroup : this._getDefaultSecruityGroup(vpc),
     });
 
     return {
@@ -86,6 +87,8 @@ export class RdsService extends cdk.Construct {
   }
 
   private _createRdsCluster(props: RdsServiceProps): DatabaseCofig {
+    const vpc = props.vpc ? props.vpc : getOrCreateVpc(this);
+
     const dbCluster = new rds.DatabaseCluster(this, 'HiiiDBCluster', {
       engine: rds.DatabaseClusterEngine.auroraMysql({ version: rds.AuroraMysqlEngineVersion.VER_2_08_1 }),
       credentials: rds.Credentials.fromGeneratedSecret(props.username),
@@ -96,8 +99,8 @@ export class RdsService extends cdk.Construct {
         vpcSubnets: {
           subnetType: ec2.SubnetType.PUBLIC,
         },
-        securityGroups: props.securityGroup,
-        vpc: props.vpc,
+        securityGroups: props.securityGroup ? props.securityGroup : this._getDefaultSecruityGroup(vpc),
+        vpc: props.vpc ? props.vpc : getOrCreateVpc(this),
       },
       parameterGroup: rds.ParameterGroup.fromParameterGroupName(this, 'HiiiParameterGroup', 'default.aurora-mysql5.7'),
       removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -109,6 +112,17 @@ export class RdsService extends cdk.Construct {
       identifier: dbCluster.clusterIdentifier,
       secret: dbCluster.secret!,
     };
+  }
+
+  private _getDefaultSecruityGroup(vpc :ec2.IVpc) : ec2.ISecurityGroup[] {
+    const mySG = new ec2.SecurityGroup(this, 'security-group-pct', {
+      vpc: vpc,
+      allowAllOutbound: false,
+      description: 'RDS Security Group Default',
+    });
+    mySG.connections.allowToAnyIpv4(ec2.Port.tcp(3306), 'DB to anywhere');
+    mySG.connections.allowFromAnyIpv4(ec2.Port.tcp(3306), 'DB from anywhere');
+    return [mySG];
   }
 }
 

@@ -997,12 +997,6 @@ const rdsServiceProps: RdsServiceProps = { ... }
 
 ---
 
-##### `vpc`<sup>Required</sup> <a name="hiii-construct-utils.RdsServiceProps.property.vpc"></a>
-
-- *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
-
----
-
 ##### `backupRetention`<sup>Optional</sup> <a name="hiii-construct-utils.RdsServiceProps.property.backupRetention"></a>
 
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
@@ -1018,6 +1012,12 @@ const rdsServiceProps: RdsServiceProps = { ... }
 ##### `securityGroup`<sup>Optional</sup> <a name="hiii-construct-utils.RdsServiceProps.property.securityGroup"></a>
 
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
+
+---
+
+##### `vpc`<sup>Optional</sup> <a name="hiii-construct-utils.RdsServiceProps.property.vpc"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
 ---
 
@@ -1131,28 +1131,6 @@ request per target.
 target cpu utilization.
 
 ---
-
-## Classes <a name="Classes"></a>
-
-### Hello <a name="hiii-construct-utils.Hello"></a>
-
-#### Initializers <a name="hiii-construct-utils.Hello.Initializer"></a>
-
-```typescript
-import { Hello } from 'hiii-construct-utils'
-
-new Hello()
-```
-
-#### Methods <a name="Methods"></a>
-
-##### `sayHello` <a name="hiii-construct-utils.Hello.sayHello"></a>
-
-```typescript
-public sayHello()
-```
-
-
 
 
 

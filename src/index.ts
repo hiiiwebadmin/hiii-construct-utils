@@ -5,9 +5,4 @@ export * from './laravel-service';
 export * from './main';
 export * from './dual-alb-fargate-svc';
 export * from './dual-nlb-fargate-svc';
-
-export class Hello {
-  public sayHello() {
-    return 'hello, world!';
-  }
-}
+export * from './common/util';
