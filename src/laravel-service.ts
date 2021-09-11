@@ -89,9 +89,9 @@ export class LaravelService extends cdk.Construct {
     const healthCheck = {
       path: '/',
       interval: cdk.Duration.minutes(1),
-      healthCheck: {
-        healthyHttpCodes: '200-399',
-      },
+      // healthCheck: {
+      //   healthyHttpCodes: '200-399',
+      // },
     };
 
     this.svc = new DualAlbFargateService(this, 'ALBFargateService', {
