@@ -884,6 +884,14 @@ The loadbalancer accessibility for the service.
 
 ---
 
+##### `cert`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.cert"></a>
+
+- *Type:* [`@aws-cdk/aws-certificatemanager.ICertificate`](#@aws-cdk/aws-certificatemanager.ICertificate)
+
+This is the FargateTaskProps below.
+
+---
+
 ##### `containerPort`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.containerPort"></a>
 
 - *Type:* `number`
@@ -915,11 +923,21 @@ enable ECS Exec.
 
 ---
 
-##### `serviceProps`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.serviceProps"></a>
+##### `fargateTaskDefinitionProps`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.fargateTaskDefinitionProps"></a>
 
-- *Type:* [`hiii-construct-utils.FargateTaskProps`](#hiii-construct-utils.FargateTaskProps)
+- *Type:* [`@aws-cdk/aws-ecs.FargateTaskDefinitionProps`](#@aws-cdk/aws-ecs.FargateTaskDefinitionProps)
 
-task options for the Laravel fargate service.
+---
+
+##### `healthCheckCode`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.healthCheckCode"></a>
+
+- *Type:* `string`
+
+---
+
+##### `healthCheckPath`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.healthCheckPath"></a>
+
+- *Type:* `string`
 
 ---
 

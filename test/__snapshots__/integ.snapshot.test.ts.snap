@@ -530,3 +530,1342 @@ Object {
   },
 }
 `;
+
+exports[`integ snapshot validation 2`] = `
+Object {
+  "Description": "(SO8030) - AWS CDK stack with cdk-fargate-patterns",
+  "Outputs": Object {
+    "laravelserviceALBFargateServiceExternalEndpointC8FB15DC": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "http://",
+            Object {
+              "Fn::GetAtt": Array [
+                "laravelserviceALBFargateServiceExternalAlbBB60A4F4",
+                "DNSName",
+              ],
+            },
+          ],
+        ],
+      },
+    },
+    "laravelserviceALBFargateServiceInternalEndpoint6E187856": Object {
+      "Value": Object {
+        "Fn::Join": Array [
+          "",
+          Array [
+            "http://",
+            Object {
+              "Fn::GetAtt": Array [
+                "laravelserviceALBFargateServiceInternalAlbDE459403",
+                "DNSName",
+              ],
+            },
+          ],
+        ],
+      },
+    },
+  },
+  "Resources": Object {
+    "laravelserviceALBFargateServiceCluster7940E7A0": Object {
+      "Type": "AWS::ECS::Cluster",
+    },
+    "laravelserviceALBFargateServiceCluster7DE475CB": Object {
+      "Properties": Object {
+        "CapacityProviders": Array [
+          "FARGATE",
+          "FARGATE_SPOT",
+        ],
+        "Cluster": Object {
+          "Ref": "laravelserviceALBFargateServiceCluster7940E7A0",
+        },
+        "DefaultCapacityProviderStrategy": Array [],
+      },
+      "Type": "AWS::ECS::ClusterCapacityProviderAssociations",
+    },
+    "laravelserviceALBFargateServiceExtAlbListener806E4F699C": Object {
+      "Properties": Object {
+        "DefaultActions": Array [
+          Object {
+            "TargetGroupArn": Object {
+              "Ref": "laravelserviceALBFargateServiceLaravelExtTGD41A89E9",
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": Object {
+          "Ref": "laravelserviceALBFargateServiceExternalAlbBB60A4F4",
+        },
+        "Port": 80,
+        "Protocol": "HTTP",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "laravelserviceALBFargateServiceExternalAlbBB60A4F4": Object {
+      "DependsOn": Array [
+        "laravelserviceVpcPublicSubnet1DefaultRoute6EF72E73",
+        "laravelserviceVpcPublicSubnet2DefaultRoute0B8E5FF0",
+      ],
+      "Properties": Object {
+        "LoadBalancerAttributes": Array [
+          Object {
+            "Key": "deletion_protection.enabled",
+            "Value": "false",
+          },
+        ],
+        "Scheme": "internet-facing",
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "laravelserviceALBFargateServiceExternalAlbSecurityGroupEA8497DD",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": Array [
+          Object {
+            "Ref": "laravelserviceVpcPublicSubnet1Subnet4366D96E",
+          },
+          Object {
+            "Ref": "laravelserviceVpcPublicSubnet2Subnet1FD71148",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "laravelserviceALBFargateServiceExternalAlbSecurityGroupEA8497DD": Object {
+      "Properties": Object {
+        "GroupDescription": "Automatically created Security Group for ELB laravelservicestacklaravelserviceALBFargateServiceExternalAlb11AD9DFE",
+        "SecurityGroupIngress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow from anyone on port 80",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "laravelserviceALBFargateServiceExternalAlbSecurityGrouptolaravelservicestacklaravelserviceALBFargateServiceLaravelServiceSecurityGroupE4372D6680AF26B32C": Object {
+      "Properties": Object {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceLaravelServiceSecurityGroup6EB48A41",
+            "GroupId",
+          ],
+        },
+        "FromPort": 80,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceExternalAlbSecurityGroupEA8497DD",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "laravelserviceALBFargateServiceIntAlbListener80BB08708B": Object {
+      "Properties": Object {
+        "DefaultActions": Array [
+          Object {
+            "TargetGroupArn": Object {
+              "Ref": "laravelserviceALBFargateServiceLaravelIntTGB3DD622E",
+            },
+            "Type": "forward",
+          },
+        ],
+        "LoadBalancerArn": Object {
+          "Ref": "laravelserviceALBFargateServiceInternalAlbDE459403",
+        },
+        "Port": 80,
+        "Protocol": "HTTP",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::Listener",
+    },
+    "laravelserviceALBFargateServiceInternalAlbDE459403": Object {
+      "Properties": Object {
+        "LoadBalancerAttributes": Array [
+          Object {
+            "Key": "deletion_protection.enabled",
+            "Value": "false",
+          },
+        ],
+        "Scheme": "internal",
+        "SecurityGroups": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "laravelserviceALBFargateServiceInternalAlbSecurityGroup462634C8",
+              "GroupId",
+            ],
+          },
+        ],
+        "Subnets": Array [
+          Object {
+            "Ref": "laravelserviceVpcPrivateSubnet1Subnet27B391EE",
+          },
+          Object {
+            "Ref": "laravelserviceVpcPrivateSubnet2Subnet4887AEA9",
+          },
+        ],
+        "Type": "application",
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+    },
+    "laravelserviceALBFargateServiceInternalAlbSecurityGroup462634C8": Object {
+      "Properties": Object {
+        "GroupDescription": "Automatically created Security Group for ELB laravelservicestacklaravelserviceALBFargateServiceInternalAlbE92F7D76",
+        "SecurityGroupIngress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow from anyone on port 80",
+            "FromPort": 80,
+            "IpProtocol": "tcp",
+            "ToPort": 80,
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "laravelserviceALBFargateServiceInternalAlbSecurityGrouptolaravelservicestacklaravelserviceALBFargateServiceLaravelServiceSecurityGroupE4372D66800282B7F7": Object {
+      "Properties": Object {
+        "Description": "Load balancer to target",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceLaravelServiceSecurityGroup6EB48A41",
+            "GroupId",
+          ],
+        },
+        "FromPort": 80,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceInternalAlbSecurityGroup462634C8",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "laravelserviceALBFargateServiceLaravelExtTGD41A89E9": Object {
+      "Properties": Object {
+        "HealthCheckIntervalSeconds": 60,
+        "HealthCheckPath": "",
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetType": "ip",
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "laravelserviceALBFargateServiceLaravelIntTGB3DD622E": Object {
+      "Properties": Object {
+        "HealthCheckIntervalSeconds": 60,
+        "HealthCheckPath": "",
+        "Port": 80,
+        "Protocol": "HTTP",
+        "TargetType": "ip",
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+    },
+    "laravelserviceALBFargateServiceLaravelService89F2D77C": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceCluster7DE475CB",
+        "laravelserviceALBFargateServiceCluster7940E7A0",
+        "laravelserviceALBFargateServiceExtAlbListener806E4F699C",
+        "laravelserviceALBFargateServiceIntAlbListener80BB08708B",
+      ],
+      "Properties": Object {
+        "CapacityProviderStrategy": Array [
+          Object {
+            "Base": 0,
+            "CapacityProvider": "FARGATE_SPOT",
+            "Weight": 1,
+          },
+          Object {
+            "Base": 0,
+            "CapacityProvider": "FARGATE",
+            "Weight": 0,
+          },
+        ],
+        "Cluster": Object {
+          "Ref": "laravelserviceALBFargateServiceCluster7940E7A0",
+        },
+        "DeploymentConfiguration": Object {
+          "DeploymentCircuitBreaker": Object {
+            "Enable": true,
+            "Rollback": true,
+          },
+          "MaximumPercent": 200,
+          "MinimumHealthyPercent": 50,
+        },
+        "DeploymentController": Object {
+          "Type": "ECS",
+        },
+        "EnableECSManagedTags": false,
+        "EnableExecuteCommand": true,
+        "HealthCheckGracePeriodSeconds": 60,
+        "LoadBalancers": Array [
+          Object {
+            "ContainerName": "Laravel",
+            "ContainerPort": 80,
+            "TargetGroupArn": Object {
+              "Ref": "laravelserviceALBFargateServiceLaravelExtTGD41A89E9",
+            },
+          },
+          Object {
+            "ContainerName": "Laravel",
+            "ContainerPort": 80,
+            "TargetGroupArn": Object {
+              "Ref": "laravelserviceALBFargateServiceLaravelIntTGB3DD622E",
+            },
+          },
+        ],
+        "NetworkConfiguration": Object {
+          "AwsvpcConfiguration": Object {
+            "AssignPublicIp": "DISABLED",
+            "SecurityGroups": Array [
+              Object {
+                "Fn::GetAtt": Array [
+                  "laravelserviceALBFargateServiceLaravelServiceSecurityGroup6EB48A41",
+                  "GroupId",
+                ],
+              },
+            ],
+            "Subnets": Array [
+              Object {
+                "Ref": "laravelserviceVpcPrivateSubnet1Subnet27B391EE",
+              },
+              Object {
+                "Ref": "laravelserviceVpcPrivateSubnet2Subnet4887AEA9",
+              },
+            ],
+          },
+        },
+        "TaskDefinition": Object {
+          "Ref": "laravelserviceTask2CC20B0F",
+        },
+      },
+      "Type": "AWS::ECS::Service",
+    },
+    "laravelserviceALBFargateServiceLaravelServiceSecurityGroup6EB48A41": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceCluster7DE475CB",
+        "laravelserviceALBFargateServiceCluster7940E7A0",
+      ],
+      "Properties": Object {
+        "GroupDescription": "laravel-service-stack/laravel-service/ALBFargateService/LaravelService/SecurityGroup",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "laravelserviceALBFargateServiceLaravelServiceSecurityGroupfromlaravelservicestacklaravelserviceALBFargateServiceExternalAlbSecurityGroup5C38AEF6803F1080E0": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceCluster7DE475CB",
+        "laravelserviceALBFargateServiceCluster7940E7A0",
+      ],
+      "Properties": Object {
+        "Description": "Load balancer to target",
+        "FromPort": 80,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceLaravelServiceSecurityGroup6EB48A41",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceExternalAlbSecurityGroupEA8497DD",
+            "GroupId",
+          ],
+        },
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "laravelserviceALBFargateServiceLaravelServiceSecurityGroupfromlaravelservicestacklaravelserviceALBFargateServiceInternalAlbSecurityGroupBE4B17968040E3A154": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceCluster7DE475CB",
+        "laravelserviceALBFargateServiceCluster7940E7A0",
+      ],
+      "Properties": Object {
+        "Description": "Load balancer to target",
+        "FromPort": 80,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceLaravelServiceSecurityGroup6EB48A41",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceInternalAlbSecurityGroup462634C8",
+            "GroupId",
+          ],
+        },
+        "ToPort": 80,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetC7EAF3BF": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceCluster7DE475CB",
+        "laravelserviceALBFargateServiceCluster7940E7A0",
+      ],
+      "Properties": Object {
+        "MaxCapacity": 10,
+        "MinCapacity": 1,
+        "ResourceId": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "service/",
+              Object {
+                "Ref": "laravelserviceALBFargateServiceCluster7940E7A0",
+              },
+              "/",
+              Object {
+                "Fn::GetAtt": Array [
+                  "laravelserviceALBFargateServiceLaravelService89F2D77C",
+                  "Name",
+                ],
+              },
+            ],
+          ],
+        },
+        "RoleARN": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":iam::",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService",
+            ],
+          ],
+        },
+        "ScalableDimension": "ecs:service:DesiredCount",
+        "ServiceNamespace": "ecs",
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+    },
+    "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetCpuScaling6CA2ED46": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceCluster7DE475CB",
+        "laravelserviceALBFargateServiceCluster7940E7A0",
+      ],
+      "Properties": Object {
+        "PolicyName": "laravelservicestacklaravelserviceALBFargateServiceLaravelServiceTaskCountTargetCpuScalingC66EE903",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": Object {
+          "Ref": "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetC7EAF3BF",
+        },
+        "TargetTrackingScalingPolicyConfiguration": Object {
+          "PredefinedMetricSpecification": Object {
+            "PredefinedMetricType": "ECSServiceAverageCPUUtilization",
+          },
+          "TargetValue": 50,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetRequestScaling259A83105": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceCluster7DE475CB",
+        "laravelserviceALBFargateServiceCluster7940E7A0",
+      ],
+      "Properties": Object {
+        "PolicyName": "laravelservicestacklaravelserviceALBFargateServiceLaravelServiceTaskCountTargetRequestScaling2E6238259",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": Object {
+          "Ref": "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetC7EAF3BF",
+        },
+        "TargetTrackingScalingPolicyConfiguration": Object {
+          "PredefinedMetricSpecification": Object {
+            "PredefinedMetricType": "ALBRequestCountPerTarget",
+            "ResourceLabel": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  Object {
+                    "Fn::Select": Array [
+                      1,
+                      Object {
+                        "Fn::Split": Array [
+                          "/",
+                          Object {
+                            "Ref": "laravelserviceALBFargateServiceIntAlbListener80BB08708B",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  Object {
+                    "Fn::Select": Array [
+                      2,
+                      Object {
+                        "Fn::Split": Array [
+                          "/",
+                          Object {
+                            "Ref": "laravelserviceALBFargateServiceIntAlbListener80BB08708B",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  Object {
+                    "Fn::Select": Array [
+                      3,
+                      Object {
+                        "Fn::Split": Array [
+                          "/",
+                          Object {
+                            "Ref": "laravelserviceALBFargateServiceIntAlbListener80BB08708B",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  Object {
+                    "Fn::GetAtt": Array [
+                      "laravelserviceALBFargateServiceLaravelIntTGB3DD622E",
+                      "TargetGroupFullName",
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          "TargetValue": 1000,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetRequestScalingB675FB22": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceCluster7DE475CB",
+        "laravelserviceALBFargateServiceCluster7940E7A0",
+      ],
+      "Properties": Object {
+        "PolicyName": "laravelservicestacklaravelserviceALBFargateServiceLaravelServiceTaskCountTargetRequestScaling880F499A",
+        "PolicyType": "TargetTrackingScaling",
+        "ScalingTargetId": Object {
+          "Ref": "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetC7EAF3BF",
+        },
+        "TargetTrackingScalingPolicyConfiguration": Object {
+          "PredefinedMetricSpecification": Object {
+            "PredefinedMetricType": "ALBRequestCountPerTarget",
+            "ResourceLabel": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  Object {
+                    "Fn::Select": Array [
+                      1,
+                      Object {
+                        "Fn::Split": Array [
+                          "/",
+                          Object {
+                            "Ref": "laravelserviceALBFargateServiceExtAlbListener806E4F699C",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  Object {
+                    "Fn::Select": Array [
+                      2,
+                      Object {
+                        "Fn::Split": Array [
+                          "/",
+                          Object {
+                            "Ref": "laravelserviceALBFargateServiceExtAlbListener806E4F699C",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  Object {
+                    "Fn::Select": Array [
+                      3,
+                      Object {
+                        "Fn::Split": Array [
+                          "/",
+                          Object {
+                            "Ref": "laravelserviceALBFargateServiceExtAlbListener806E4F699C",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  "/",
+                  Object {
+                    "Fn::GetAtt": Array [
+                      "laravelserviceALBFargateServiceLaravelExtTGD41A89E9",
+                      "TargetGroupFullName",
+                    ],
+                  },
+                ],
+              ],
+            },
+          },
+          "TargetValue": 1000,
+        },
+      },
+      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
+    },
+    "laravelserviceALBFargateServiceOnTaskStateChangeEvent1EBFFCE0": Object {
+      "Properties": Object {
+        "EventPattern": Object {
+          "detail": Object {
+            "clusterArn": Array [
+              Object {
+                "Fn::GetAtt": Array [
+                  "laravelserviceALBFargateServiceCluster7940E7A0",
+                  "Arn",
+                ],
+              },
+            ],
+          },
+          "detail-type": Array [
+            "ECS Task State Change",
+          ],
+          "source": Array [
+            "aws.ecs",
+          ],
+        },
+        "State": "ENABLED",
+        "Targets": Array [
+          Object {
+            "Arn": Object {
+              "Fn::GetAtt": Array [
+                "laravelserviceALBFargateServiceSpotTermHandler2926E98A",
+                "Arn",
+              ],
+            },
+            "Id": "Target0",
+          },
+        ],
+      },
+      "Type": "AWS::Events::Rule",
+    },
+    "laravelserviceALBFargateServiceOnTaskStateChangeEventAllowEventRulelaravelservicestacklaravelserviceALBFargateServiceSpotTermHandler16A347B940B1C0F4": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceSpotTermHandler2926E98A",
+            "Arn",
+          ],
+        },
+        "Principal": "events.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceOnTaskStateChangeEvent1EBFFCE0",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "laravelserviceALBFargateServiceSpotTermHandler2926E98A": Object {
+      "DependsOn": Array [
+        "laravelserviceALBFargateServiceSpotTermHandlerServiceRoleDefaultPolicy7122A815",
+        "laravelserviceALBFargateServiceSpotTermHandlerServiceRoleEC616240",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "ImageUri": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Ref": "AWS::AccountId",
+                },
+                ".dkr.ecr.",
+                Object {
+                  "Ref": "AWS::Region",
+                },
+                ".",
+                Object {
+                  "Ref": "AWS::URLSuffix",
+                },
+                "/aws-cdk/assets:ec3135368f0a72eb451adf9e40cf23a4b80beececc1908170d08a7f81f91f59a",
+              ],
+            ],
+          },
+        },
+        "PackageType": "Image",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceALBFargateServiceSpotTermHandlerServiceRoleEC616240",
+            "Arn",
+          ],
+        },
+        "Timeout": 20,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "laravelserviceALBFargateServiceSpotTermHandlerServiceRoleDefaultPolicy7122A815": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "ecs:DescribeServices",
+                "elasticloadbalancing:DeregisterTargets",
+                "ec2:DescribeSubnets",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "laravelserviceALBFargateServiceSpotTermHandlerServiceRoleDefaultPolicy7122A815",
+        "Roles": Array [
+          Object {
+            "Ref": "laravelserviceALBFargateServiceSpotTermHandlerServiceRoleEC616240",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "laravelserviceALBFargateServiceSpotTermHandlerServiceRoleEC616240": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "laravelserviceLogGroup5BE057DA": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "RetentionInDays": 30,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "laravelserviceTask2CC20B0F": Object {
+      "Properties": Object {
+        "ContainerDefinitions": Array [
+          Object {
+            "Environment": Array [],
+            "Essential": true,
+            "Image": Object {
+              "Fn::Join": Array [
+                "",
+                Array [
+                  Object {
+                    "Ref": "AWS::AccountId",
+                  },
+                  ".dkr.ecr.",
+                  Object {
+                    "Ref": "AWS::Region",
+                  },
+                  ".",
+                  Object {
+                    "Ref": "AWS::URLSuffix",
+                  },
+                  "/aws-cdk/assets:caa3938948694bedc36ebdb733a9cfeb18ddb5c1e9a842bf6e124c187cb69cf8",
+                ],
+              ],
+            },
+            "LogConfiguration": Object {
+              "LogDriver": "awslogs",
+              "Options": Object {
+                "awslogs-group": Object {
+                  "Ref": "laravelserviceLogGroup5BE057DA",
+                },
+                "awslogs-region": Object {
+                  "Ref": "AWS::Region",
+                },
+                "awslogs-stream-prefix": "Laravel-Service",
+              },
+            },
+            "Name": "Laravel",
+            "PortMappings": Array [
+              Object {
+                "ContainerPort": 80,
+                "Protocol": "tcp",
+              },
+            ],
+            "Secrets": Array [],
+          },
+        ],
+        "Cpu": "1024",
+        "ExecutionRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceTaskExecutionRoleC6892378",
+            "Arn",
+          ],
+        },
+        "Family": "laravelservicestacklaravelserviceTask8D29C834",
+        "Memory": "1024",
+        "NetworkMode": "awsvpc",
+        "RequiresCompatibilities": Array [
+          "FARGATE",
+        ],
+        "TaskRoleArn": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceTaskTaskRole39ADC9D7",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::ECS::TaskDefinition",
+    },
+    "laravelserviceTaskExecutionRoleC6892378": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "laravelserviceTaskExecutionRoleDefaultPolicy2970D51F": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":ecr:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":repository/aws-cdk/assets",
+                  ],
+                ],
+              },
+            },
+            Object {
+              "Action": "ecr:GetAuthorizationToken",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "laravelserviceLogGroup5BE057DA",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "laravelserviceTaskExecutionRoleDefaultPolicy2970D51F",
+        "Roles": Array [
+          Object {
+            "Ref": "laravelserviceTaskExecutionRoleC6892378",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "laravelserviceTaskTaskRole39ADC9D7": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "ecs-tasks.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "laravelserviceTaskTaskRoleDefaultPolicyC942F887": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "ssmmessages:CreateControlChannel",
+                "ssmmessages:CreateDataChannel",
+                "ssmmessages:OpenControlChannel",
+                "ssmmessages:OpenDataChannel",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": "logs:DescribeLogGroups",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+            Object {
+              "Action": Array [
+                "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "laravelserviceTaskTaskRoleDefaultPolicyC942F887",
+        "Roles": Array [
+          Object {
+            "Ref": "laravelserviceTaskTaskRole39ADC9D7",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "laravelserviceVpc1CA47DE0": Object {
+      "Properties": Object {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "laravelserviceVpcIGW93E13DF6": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "laravelserviceVpcPrivateSubnet1DefaultRouteB85100BB": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet1NATGatewayD808B041",
+        },
+        "RouteTableId": Object {
+          "Ref": "laravelserviceVpcPrivateSubnet1RouteTableB81A4CE7",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "laravelserviceVpcPrivateSubnet1RouteTableAssociationB680720B": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "laravelserviceVpcPrivateSubnet1RouteTableB81A4CE7",
+        },
+        "SubnetId": Object {
+          "Ref": "laravelserviceVpcPrivateSubnet1Subnet27B391EE",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "laravelserviceVpcPrivateSubnet1RouteTableB81A4CE7": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "laravelserviceVpcPrivateSubnet1Subnet27B391EE": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.128.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "laravelserviceVpcPrivateSubnet2DefaultRoute421D5037": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "NatGatewayId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet1NATGatewayD808B041",
+        },
+        "RouteTableId": Object {
+          "Ref": "laravelserviceVpcPrivateSubnet2RouteTable908896D6",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "laravelserviceVpcPrivateSubnet2RouteTable908896D6": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "laravelserviceVpcPrivateSubnet2RouteTableAssociation4EA7728D": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "laravelserviceVpcPrivateSubnet2RouteTable908896D6",
+        },
+        "SubnetId": Object {
+          "Ref": "laravelserviceVpcPrivateSubnet2Subnet4887AEA9",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "laravelserviceVpcPrivateSubnet2Subnet4887AEA9": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.192.0/18",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "laravelserviceVpcPublicSubnet1DefaultRoute6EF72E73": Object {
+      "DependsOn": Array [
+        "laravelserviceVpcVPCGW08137E01",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "laravelserviceVpcIGW93E13DF6",
+        },
+        "RouteTableId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet1RouteTable393C092A",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "laravelserviceVpcPublicSubnet1EIPD24F4C24": Object {
+      "Properties": Object {
+        "Domain": "vpc",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::EIP",
+    },
+    "laravelserviceVpcPublicSubnet1NATGatewayD808B041": Object {
+      "Properties": Object {
+        "AllocationId": Object {
+          "Fn::GetAtt": Array [
+            "laravelserviceVpcPublicSubnet1EIPD24F4C24",
+            "AllocationId",
+          ],
+        },
+        "SubnetId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet1Subnet4366D96E",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PublicSubnet1",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::NatGateway",
+    },
+    "laravelserviceVpcPublicSubnet1RouteTable393C092A": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "laravelserviceVpcPublicSubnet1RouteTableAssociation8F9B7D58": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet1RouteTable393C092A",
+        },
+        "SubnetId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet1Subnet4366D96E",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "laravelserviceVpcPublicSubnet1Subnet4366D96E": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            0,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.0.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "laravelserviceVpcPublicSubnet2DefaultRoute0B8E5FF0": Object {
+      "DependsOn": Array [
+        "laravelserviceVpcVPCGW08137E01",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "laravelserviceVpcIGW93E13DF6",
+        },
+        "RouteTableId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet2RouteTableB05D5A4B",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "laravelserviceVpcPublicSubnet2RouteTableAssociation22A521AA": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet2RouteTableB05D5A4B",
+        },
+        "SubnetId": Object {
+          "Ref": "laravelserviceVpcPublicSubnet2Subnet1FD71148",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "laravelserviceVpcPublicSubnet2RouteTableB05D5A4B": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "laravelserviceVpcPublicSubnet2Subnet1FD71148": Object {
+      "Properties": Object {
+        "AvailabilityZone": Object {
+          "Fn::Select": Array [
+            1,
+            Object {
+              "Fn::GetAZs": "",
+            },
+          ],
+        },
+        "CidrBlock": "10.0.64.0/18",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "laravel-service-stack/laravel-service/Vpc/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "laravelserviceVpcVPCGW08137E01": Object {
+      "Properties": Object {
+        "InternetGatewayId": Object {
+          "Ref": "laravelserviceVpcIGW93E13DF6",
+        },
+        "VpcId": Object {
+          "Ref": "laravelserviceVpc1CA47DE0",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+  },
+}
+`;

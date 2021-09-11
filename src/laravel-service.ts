@@ -1,18 +1,15 @@
+import * as acm from '@aws-cdk/aws-certificatemanager';
 import * as ec2 from '@aws-cdk/aws-ec2';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as efs from '@aws-cdk/aws-efs';
 import * as logs from '@aws-cdk/aws-logs';
 import * as cdk from '@aws-cdk/core';
-import { DualAlbFargateService, FargateTaskProps, LoadBalancerAccessibility, RdsService } from './';
+import { DualAlbFargateService, LoadBalancerAccessibility, RdsService } from './';
 import { getOrCreateVpc } from './common/util';
 
 
 export interface LaravelProps {
   readonly vpc?: ec2.IVpc;
-  /**
-   * task options for the Laravel fargate service
-   */
-  readonly serviceProps?: FargateTaskProps;
   /**
    * enable fargate spot
    */
@@ -40,6 +37,16 @@ export interface LaravelProps {
   readonly efsFileSystem?: efs.FileSystemProps;
 
   readonly db?: RdsService;
+
+  readonly fargateTaskDefinitionProps? : ecs.FargateTaskDefinitionProps;
+
+  /**
+  *This is the FargateTaskProps below
+  */
+  readonly cert? : acm.ICertificate;
+
+  readonly healthCheckPath? : string;
+  readonly healthCheckCode? : string;
 }
 
 export class LaravelService extends cdk.Construct {
@@ -55,9 +62,9 @@ export class LaravelService extends cdk.Construct {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
-    const task = new ecs.FargateTaskDefinition(this, 'Task', {
-      cpu: 256,
-      memoryLimitMiB: 512,
+    const task = new ecs.FargateTaskDefinition(this, 'Task', props.fargateTaskDefinitionProps ? props.fargateTaskDefinitionProps : {
+      cpu: 1024,
+      memoryLimitMiB: 1024,
     });
 
     task.addContainer('Laravel', {
@@ -87,24 +94,40 @@ export class LaravelService extends cdk.Construct {
     });
 
     const healthCheck = {
-      path: '/',
+      path: props.healthCheckPath ? props.healthCheckPath : '',
       interval: cdk.Duration.minutes(1),
-      // healthCheck: {
-      //   healthyHttpCodes: '200-399',
-      // },
+      healthCheck: {
+        healthyHttpCodes: props.healthCheckCode ? props.healthCheckCode : '200',
+      },
     };
+
+    var serviceProps = null;
+
+    if (props.cert) {
+      serviceProps = [
+        {
+          internal: { port: 80 },
+          external: props.loadbalancer,
+          task,
+          healthCheck,
+        },
+      ];
+    } else {
+      serviceProps = [
+        {
+          internal: { port: 80 },
+          external: { port: 80 },
+          task,
+          healthCheck,
+        },
+      ];
+    }
 
     this.svc = new DualAlbFargateService(this, 'ALBFargateService', {
       vpc: this.vpc,
       spot: props.spot,
       enableExecuteCommand: props.enableExecuteCommand,
-      tasks: props.serviceProps ? [props.serviceProps] : [
-        {
-          external: props.loadbalancer,
-          task,
-          healthCheck,
-        },
-      ],
+      tasks: serviceProps,
       route53Ops: { enableLoadBalancerAlias: false },
     });
 
