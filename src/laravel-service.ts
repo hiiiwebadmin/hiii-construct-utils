@@ -94,7 +94,7 @@ export class LaravelService extends cdk.Construct {
     });
 
     const healthCheck = {
-      path: props.healthCheckPath ? props.healthCheckPath : '',
+      path: props.healthCheckPath ? props.healthCheckPath : '/',
       interval: cdk.Duration.minutes(1),
       healthCheck: {
         healthyHttpCodes: props.healthCheckCode ? props.healthCheckCode : '200',
@@ -107,7 +107,7 @@ export class LaravelService extends cdk.Construct {
       serviceProps = [
         {
           internal: { port: 80 },
-          external: props.loadbalancer,
+          external: { port: 443, certificate: [props.cert] },
           task,
           healthCheck,
         },

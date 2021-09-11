@@ -22,7 +22,7 @@ export class IntegTesting {
       spot: true,
       enableExecuteCommand: true,
       code: path.join(__dirname, '../services/'),
-      loadbalancer: { port: 443 },
+      loadbalancer: { port: 80 },
     });
     this.stacks = [stack, laravelStack];
   }

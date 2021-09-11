@@ -764,7 +764,7 @@ Object {
     "laravelserviceALBFargateServiceLaravelExtTGD41A89E9": Object {
       "Properties": Object {
         "HealthCheckIntervalSeconds": 60,
-        "HealthCheckPath": "",
+        "HealthCheckPath": "/",
         "Port": 80,
         "Protocol": "HTTP",
         "TargetType": "ip",
@@ -777,7 +777,7 @@ Object {
     "laravelserviceALBFargateServiceLaravelIntTGB3DD622E": Object {
       "Properties": Object {
         "HealthCheckIntervalSeconds": 60,
-        "HealthCheckPath": "",
+        "HealthCheckPath": "/",
         "Port": 80,
         "Protocol": "HTTP",
         "TargetType": "ip",
