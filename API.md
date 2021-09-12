@@ -876,7 +876,7 @@ The local path to the Laravel code base.
 
 ---
 
-##### `fromEcrRepository`<sup>Required</sup> <a name="hiii-construct-utils.LaravelProps.property.fromEcrRepository"></a>
+##### `fromRegistry`<sup>Required</sup> <a name="hiii-construct-utils.LaravelProps.property.fromRegistry"></a>
 
 - *Type:* `boolean`
 
