@@ -673,7 +673,7 @@ Object {
     },
     "laravelserviceALBFargateServiceLaravelExtTGD41A89E9": Object {
       "Properties": Object {
-        "HealthCheckIntervalSeconds": 60,
+        "HealthCheckIntervalSeconds": 90,
         "HealthCheckPath": "/",
         "Matcher": Object {
           "HttpCode": "200",

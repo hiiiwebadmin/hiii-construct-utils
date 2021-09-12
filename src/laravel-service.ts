@@ -1,5 +1,6 @@
 import * as acm from '@aws-cdk/aws-certificatemanager';
 import * as ec2 from '@aws-cdk/aws-ec2';
+import * as ecr from '@aws-cdk/aws-ecr';
 import * as ecs from '@aws-cdk/aws-ecs';
 import * as efs from '@aws-cdk/aws-efs';
 import * as logs from '@aws-cdk/aws-logs';
@@ -68,8 +69,16 @@ export class LaravelService extends cdk.Construct {
       memoryLimitMiB: 1024,
     });
 
+    var image = null;
+    if (props.fromRegistry) {
+      const repos = ecr.Repository.fromRepositoryName(this, 'from-arn', props.code);
+      image = ecs.ContainerImage.fromEcrRepository(repos, 'latest');
+    } else {
+      image = ecs.ContainerImage.fromAsset(props.code);
+    }
+
     task.addContainer('Laravel', {
-      image: props.fromRegistry ? ecs.ContainerImage.fromRegistry(props.code) : ecs.ContainerImage.fromAsset(props.code),
+      image: image,
       portMappings: [{ containerPort: props.containerPort ?? 80 }],
       environment: props.db ? {
         Laravel_DB_NAME: 'Laravel',
@@ -108,7 +117,7 @@ export class LaravelService extends cdk.Construct {
           task,
           healthCheck: {
             path: props.healthCheckPath ? props.healthCheckPath : '/',
-            interval: cdk.Duration.seconds(60),
+            interval: cdk.Duration.seconds(90),
             healthyHttpCodes: props.healthCheckCode ? props.healthCheckCode : '200',
           },
         },
