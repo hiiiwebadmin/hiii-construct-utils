@@ -551,22 +551,6 @@ Object {
         ],
       },
     },
-    "laravelserviceALBFargateServiceInternalEndpoint6E187856": Object {
-      "Value": Object {
-        "Fn::Join": Array [
-          "",
-          Array [
-            "http://",
-            Object {
-              "Fn::GetAtt": Array [
-                "laravelserviceALBFargateServiceInternalAlbDE459403",
-                "DNSName",
-              ],
-            },
-          ],
-        ],
-      },
-    },
   },
   "Resources": Object {
     "laravelserviceALBFargateServiceCluster7940E7A0": Object {
@@ -675,106 +659,7 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroupEgress",
     },
-    "laravelserviceALBFargateServiceIntAlbListener80BB08708B": Object {
-      "Properties": Object {
-        "DefaultActions": Array [
-          Object {
-            "TargetGroupArn": Object {
-              "Ref": "laravelserviceALBFargateServiceLaravelIntTGB3DD622E",
-            },
-            "Type": "forward",
-          },
-        ],
-        "LoadBalancerArn": Object {
-          "Ref": "laravelserviceALBFargateServiceInternalAlbDE459403",
-        },
-        "Port": 80,
-        "Protocol": "HTTP",
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::Listener",
-    },
-    "laravelserviceALBFargateServiceInternalAlbDE459403": Object {
-      "Properties": Object {
-        "LoadBalancerAttributes": Array [
-          Object {
-            "Key": "deletion_protection.enabled",
-            "Value": "false",
-          },
-        ],
-        "Scheme": "internal",
-        "SecurityGroups": Array [
-          Object {
-            "Fn::GetAtt": Array [
-              "laravelserviceALBFargateServiceInternalAlbSecurityGroup462634C8",
-              "GroupId",
-            ],
-          },
-        ],
-        "Subnets": Array [
-          Object {
-            "Ref": "laravelserviceVpcPrivateSubnet1Subnet27B391EE",
-          },
-          Object {
-            "Ref": "laravelserviceVpcPrivateSubnet2Subnet4887AEA9",
-          },
-        ],
-        "Type": "application",
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
-    },
-    "laravelserviceALBFargateServiceInternalAlbSecurityGroup462634C8": Object {
-      "Properties": Object {
-        "GroupDescription": "Automatically created Security Group for ELB laravelservicestacklaravelserviceALBFargateServiceInternalAlbE92F7D76",
-        "SecurityGroupIngress": Array [
-          Object {
-            "CidrIp": "0.0.0.0/0",
-            "Description": "Allow from anyone on port 80",
-            "FromPort": 80,
-            "IpProtocol": "tcp",
-            "ToPort": 80,
-          },
-        ],
-        "VpcId": Object {
-          "Ref": "laravelserviceVpc1CA47DE0",
-        },
-      },
-      "Type": "AWS::EC2::SecurityGroup",
-    },
-    "laravelserviceALBFargateServiceInternalAlbSecurityGrouptolaravelservicestacklaravelserviceALBFargateServiceLaravelServiceSecurityGroupE4372D66800282B7F7": Object {
-      "Properties": Object {
-        "Description": "Load balancer to target",
-        "DestinationSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "laravelserviceALBFargateServiceLaravelServiceSecurityGroup6EB48A41",
-            "GroupId",
-          ],
-        },
-        "FromPort": 80,
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "laravelserviceALBFargateServiceInternalAlbSecurityGroup462634C8",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "ToPort": 80,
-      },
-      "Type": "AWS::EC2::SecurityGroupEgress",
-    },
     "laravelserviceALBFargateServiceLaravelExtTGD41A89E9": Object {
-      "Properties": Object {
-        "HealthCheckIntervalSeconds": 60,
-        "HealthCheckPath": "/",
-        "Port": 80,
-        "Protocol": "HTTP",
-        "TargetType": "ip",
-        "VpcId": Object {
-          "Ref": "laravelserviceVpc1CA47DE0",
-        },
-      },
-      "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
-    },
-    "laravelserviceALBFargateServiceLaravelIntTGB3DD622E": Object {
       "Properties": Object {
         "HealthCheckIntervalSeconds": 60,
         "HealthCheckPath": "/",
@@ -792,7 +677,6 @@ Object {
         "laravelserviceALBFargateServiceCluster7DE475CB",
         "laravelserviceALBFargateServiceCluster7940E7A0",
         "laravelserviceALBFargateServiceExtAlbListener806E4F699C",
-        "laravelserviceALBFargateServiceIntAlbListener80BB08708B",
       ],
       "Properties": Object {
         "CapacityProviderStrategy": Array [
@@ -830,13 +714,6 @@ Object {
             "ContainerPort": 80,
             "TargetGroupArn": Object {
               "Ref": "laravelserviceALBFargateServiceLaravelExtTGD41A89E9",
-            },
-          },
-          Object {
-            "ContainerName": "Laravel",
-            "ContainerPort": 80,
-            "TargetGroupArn": Object {
-              "Ref": "laravelserviceALBFargateServiceLaravelIntTGB3DD622E",
             },
           },
         ],
@@ -912,31 +789,6 @@ Object {
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "laravelserviceALBFargateServiceLaravelServiceSecurityGroupfromlaravelservicestacklaravelserviceALBFargateServiceInternalAlbSecurityGroupBE4B17968040E3A154": Object {
-      "DependsOn": Array [
-        "laravelserviceALBFargateServiceCluster7DE475CB",
-        "laravelserviceALBFargateServiceCluster7940E7A0",
-      ],
-      "Properties": Object {
-        "Description": "Load balancer to target",
-        "FromPort": 80,
-        "GroupId": Object {
-          "Fn::GetAtt": Array [
-            "laravelserviceALBFargateServiceLaravelServiceSecurityGroup6EB48A41",
-            "GroupId",
-          ],
-        },
-        "IpProtocol": "tcp",
-        "SourceSecurityGroupId": Object {
-          "Fn::GetAtt": Array [
-            "laravelserviceALBFargateServiceInternalAlbSecurityGroup462634C8",
-            "GroupId",
-          ],
-        },
-        "ToPort": 80,
-      },
-      "Type": "AWS::EC2::SecurityGroupIngress",
-    },
     "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetC7EAF3BF": Object {
       "DependsOn": Array [
         "laravelserviceALBFargateServiceCluster7DE475CB",
@@ -1000,81 +852,6 @@ Object {
             "PredefinedMetricType": "ECSServiceAverageCPUUtilization",
           },
           "TargetValue": 50,
-        },
-      },
-      "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
-    },
-    "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetRequestScaling259A83105": Object {
-      "DependsOn": Array [
-        "laravelserviceALBFargateServiceCluster7DE475CB",
-        "laravelserviceALBFargateServiceCluster7940E7A0",
-      ],
-      "Properties": Object {
-        "PolicyName": "laravelservicestacklaravelserviceALBFargateServiceLaravelServiceTaskCountTargetRequestScaling2E6238259",
-        "PolicyType": "TargetTrackingScaling",
-        "ScalingTargetId": Object {
-          "Ref": "laravelserviceALBFargateServiceLaravelServiceTaskCountTargetC7EAF3BF",
-        },
-        "TargetTrackingScalingPolicyConfiguration": Object {
-          "PredefinedMetricSpecification": Object {
-            "PredefinedMetricType": "ALBRequestCountPerTarget",
-            "ResourceLabel": Object {
-              "Fn::Join": Array [
-                "",
-                Array [
-                  Object {
-                    "Fn::Select": Array [
-                      1,
-                      Object {
-                        "Fn::Split": Array [
-                          "/",
-                          Object {
-                            "Ref": "laravelserviceALBFargateServiceIntAlbListener80BB08708B",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  "/",
-                  Object {
-                    "Fn::Select": Array [
-                      2,
-                      Object {
-                        "Fn::Split": Array [
-                          "/",
-                          Object {
-                            "Ref": "laravelserviceALBFargateServiceIntAlbListener80BB08708B",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  "/",
-                  Object {
-                    "Fn::Select": Array [
-                      3,
-                      Object {
-                        "Fn::Split": Array [
-                          "/",
-                          Object {
-                            "Ref": "laravelserviceALBFargateServiceIntAlbListener80BB08708B",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  "/",
-                  Object {
-                    "Fn::GetAtt": Array [
-                      "laravelserviceALBFargateServiceLaravelIntTGB3DD622E",
-                      "TargetGroupFullName",
-                    ],
-                  },
-                ],
-              ],
-            },
-          },
-          "TargetValue": 1000,
         },
       },
       "Type": "AWS::ApplicationAutoScaling::ScalingPolicy",
@@ -1357,7 +1134,7 @@ Object {
             "Secrets": Array [],
           },
         ],
-        "Cpu": "1024",
+        "Cpu": "512",
         "ExecutionRoleArn": Object {
           "Fn::GetAtt": Array [
             "laravelserviceTaskExecutionRoleC6892378",

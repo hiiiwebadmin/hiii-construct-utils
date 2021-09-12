@@ -4,7 +4,7 @@ import * as ecs from '@aws-cdk/aws-ecs';
 import * as efs from '@aws-cdk/aws-efs';
 import * as logs from '@aws-cdk/aws-logs';
 import * as cdk from '@aws-cdk/core';
-import { DualAlbFargateService, LoadBalancerAccessibility, RdsService } from './';
+import { DualAlbFargateService, RdsService } from './';
 import { getOrCreateVpc } from './common/util';
 
 
@@ -28,16 +28,15 @@ export interface LaravelProps {
    */
   readonly containerPort?: number;
   /**
-   * The loadbalancer accessibility for the service.
-   */
-  readonly loadbalancer: LoadBalancerAccessibility;
-  /**
    * Options to create the EFS FileSystem
    */
   readonly efsFileSystem?: efs.FileSystemProps;
 
   readonly db?: RdsService;
 
+  /**
+   * https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
+  */
   readonly fargateTaskDefinitionProps? : ecs.FargateTaskDefinitionProps;
 
   /**
@@ -63,7 +62,7 @@ export class LaravelService extends cdk.Construct {
     });
 
     const task = new ecs.FargateTaskDefinition(this, 'Task', props.fargateTaskDefinitionProps ? props.fargateTaskDefinitionProps : {
-      cpu: 1024,
+      cpu: 512,
       memoryLimitMiB: 1024,
     });
 
@@ -101,27 +100,13 @@ export class LaravelService extends cdk.Construct {
       },
     };
 
-    var serviceProps = null;
-
-    if (props.cert) {
-      serviceProps = [
-        {
-          internal: { port: 80 },
-          external: { port: 443, certificate: [props.cert] },
-          task,
-          healthCheck,
-        },
-      ];
-    } else {
-      serviceProps = [
-        {
-          internal: { port: 80 },
-          external: { port: 80 },
-          task,
-          healthCheck,
-        },
-      ];
-    }
+    var serviceProps = [
+      {
+        external: props.cert ? { port: 443, certificate: [props.cert] } : { port: 80 },
+        task,
+        healthCheck,
+      },
+    ];
 
     this.svc = new DualAlbFargateService(this, 'ALBFargateService', {
       vpc: this.vpc,

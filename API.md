@@ -876,14 +876,6 @@ The local path to the Laravel code base.
 
 ---
 
-##### `loadbalancer`<sup>Required</sup> <a name="hiii-construct-utils.LaravelProps.property.loadbalancer"></a>
-
-- *Type:* [`hiii-construct-utils.LoadBalancerAccessibility`](#hiii-construct-utils.LoadBalancerAccessibility)
-
-The loadbalancer accessibility for the service.
-
----
-
 ##### `cert`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.cert"></a>
 
 - *Type:* [`@aws-cdk/aws-certificatemanager.ICertificate`](#@aws-cdk/aws-certificatemanager.ICertificate)
@@ -926,6 +918,8 @@ enable ECS Exec.
 ##### `fargateTaskDefinitionProps`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.fargateTaskDefinitionProps"></a>
 
 - *Type:* [`@aws-cdk/aws-ecs.FargateTaskDefinitionProps`](#@aws-cdk/aws-ecs.FargateTaskDefinitionProps)
+
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html.
 
 ---
 
