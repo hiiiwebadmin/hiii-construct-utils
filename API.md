@@ -876,6 +876,12 @@ The local path to the Laravel code base.
 
 ---
 
+##### `fromRegistry`<sup>Required</sup> <a name="hiii-construct-utils.LaravelProps.property.fromRegistry"></a>
+
+- *Type:* `boolean`
+
+---
+
 ##### `cert`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.cert"></a>
 
 - *Type:* [`@aws-cdk/aws-certificatemanager.ICertificate`](#@aws-cdk/aws-certificatemanager.ICertificate)

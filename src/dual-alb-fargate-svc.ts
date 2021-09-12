@@ -2,6 +2,7 @@ import * as elbv2 from '@aws-cdk/aws-elasticloadbalancingv2';
 import * as route53 from '@aws-cdk/aws-route53';
 import * as targets from '@aws-cdk/aws-route53-targets';
 import * as cdk from '@aws-cdk/core';
+import { printOutput } from './common/util';
 import { BaseFargateService, BaseFargateServiceProps } from './main';
 
 
@@ -65,6 +66,13 @@ export class DualAlbFargateService extends BaseFargateService {
       });
 
       if (t.external) {
+        //ken check
+        if (t.healthCheck) {
+          printOutput(this, 'DualAlbFargethealthCheckCode - ', t.healthCheck.healthyHttpCodes ? t.healthCheck.healthyHttpCodes : '200');
+        } else {
+          printOutput(this, 'DualAlbFargethealthCheckCode - ', 't.healthCheck Null');
+        }
+
         const exttg = new elbv2.ApplicationTargetGroup(this, `${defaultContainerName}ExtTG`, {
           protocol: elbv2.ApplicationProtocol.HTTP,
           port: t.external.port,
@@ -104,6 +112,7 @@ export class DualAlbFargateService extends BaseFargateService {
       }
 
       if (t.internal) {
+
         const inttg = new elbv2.ApplicationTargetGroup(this, `${defaultContainerName}IntTG`, {
           protocol: elbv2.ApplicationProtocol.HTTP,
           port: t.internal.port,

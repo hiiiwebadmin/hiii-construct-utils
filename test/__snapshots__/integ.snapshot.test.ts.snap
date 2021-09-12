@@ -535,6 +535,9 @@ exports[`integ snapshot validation 2`] = `
 Object {
   "Description": "(SO8030) - AWS CDK stack with cdk-fargate-patterns",
   "Outputs": Object {
+    "laravelserviceALBFargateServiceDualAlbFargethealthCheckCode865E7D08": Object {
+      "Value": "200",
+    },
     "laravelserviceALBFargateServiceExternalEndpointC8FB15DC": Object {
       "Value": Object {
         "Fn::Join": Array [
@@ -550,6 +553,15 @@ Object {
           ],
         ],
       },
+    },
+    "laravelserviceHiiiFromRegistry9256CA76": Object {
+      "Value": "false",
+    },
+    "laravelserviceHiiihealthCheckCode4B9C7C35": Object {
+      "Value": "200",
+    },
+    "laravelserviceHiiihealthCheckPath02ACBF77": Object {
+      "Value": "/",
     },
   },
   "Resources": Object {
@@ -661,8 +673,11 @@ Object {
     },
     "laravelserviceALBFargateServiceLaravelExtTGD41A89E9": Object {
       "Properties": Object {
-        "HealthCheckIntervalSeconds": 60,
+        "HealthCheckIntervalSeconds": 90,
         "HealthCheckPath": "/",
+        "Matcher": Object {
+          "HttpCode": "200",
+        },
         "Port": 80,
         "Protocol": "HTTP",
         "TargetType": "ip",

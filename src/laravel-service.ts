@@ -5,10 +5,12 @@ import * as efs from '@aws-cdk/aws-efs';
 import * as logs from '@aws-cdk/aws-logs';
 import * as cdk from '@aws-cdk/core';
 import { DualAlbFargateService, RdsService } from './';
-import { getOrCreateVpc } from './common/util';
+import { getOrCreateVpc, printOutput } from './common/util';
 
 
 export interface LaravelProps {
+  readonly fromRegistry : boolean;
+
   readonly vpc?: ec2.IVpc;
   /**
    * enable fargate spot
@@ -67,7 +69,7 @@ export class LaravelService extends cdk.Construct {
     });
 
     task.addContainer('Laravel', {
-      image: ecs.ContainerImage.fromAsset(props.code),
+      image: props.fromRegistry ? ecs.ContainerImage.fromRegistry(props.code) : ecs.ContainerImage.fromAsset(props.code),
       portMappings: [{ containerPort: props.containerPort ?? 80 }],
       environment: props.db ? {
         Laravel_DB_NAME: 'Laravel',
@@ -92,29 +94,28 @@ export class LaravelService extends cdk.Construct {
       } : {},
     });
 
-    const healthCheck = {
-      path: props.healthCheckPath ? props.healthCheckPath : '/',
-      interval: cdk.Duration.minutes(1),
-      healthCheck: {
-        healthyHttpCodes: props.healthCheckCode ? props.healthCheckCode : '200',
-      },
-    };
-
-    var serviceProps = [
-      {
-        external: props.cert ? { port: 443, certificate: [props.cert] } : { port: 80 },
-        task,
-        healthCheck,
-      },
-    ];
+    printOutput(this, 'HiiiFromRegistry - ', String(props.fromRegistry));
+    printOutput(this, 'HiiihealthCheckCode - ', props.healthCheckCode ? props.healthCheckCode : '200');
+    printOutput(this, 'HiiihealthCheckPath - ', props.healthCheckPath ? props.healthCheckPath : '/');
 
     this.svc = new DualAlbFargateService(this, 'ALBFargateService', {
       vpc: this.vpc,
       spot: props.spot,
       enableExecuteCommand: props.enableExecuteCommand,
-      tasks: serviceProps,
+      tasks: [
+        {
+          external: props.cert ? { port: 443, certificate: [props.cert] } : { port: 80 },
+          task,
+          healthCheck: {
+            path: props.healthCheckPath ? props.healthCheckPath : '/',
+            interval: cdk.Duration.seconds(90),
+            healthyHttpCodes: props.healthCheckCode ? props.healthCheckCode : '200',
+          },
+        },
+      ],
       route53Ops: { enableLoadBalancerAlias: false },
     });
+
 
     if (props.efsFileSystem) {
       // EFS volume
