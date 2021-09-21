@@ -1106,7 +1106,12 @@ Object {
       "Properties": Object {
         "ContainerDefinitions": Array [
           Object {
-            "Environment": Array [],
+            "Environment": Array [
+              Object {
+                "Name": "TEST",
+                "Value": "Hiii Test",
+              },
+            ],
             "Essential": true,
             "Image": Object {
               "Fn::Join": Array [

@@ -20,6 +20,9 @@ export class IntegTesting {
     const laravelStack = new cdk.Stack(app, 'laravel-service-stack', { env });
     new hiii.LaravelService(laravelStack, 'laravel-service', {
       fromRegistry: false,
+      environment: {
+        TEST: 'Hiii Test',
+      },
       spot: true,
       enableExecuteCommand: true,
       code: path.join(__dirname, '../services/'),

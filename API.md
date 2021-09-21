@@ -921,6 +921,12 @@ enable ECS Exec.
 
 ---
 
+##### `environment`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.environment"></a>
+
+- *Type:* {[ key: string ]: `string`}
+
+---
+
 ##### `fargateTaskDefinitionProps`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.fargateTaskDefinitionProps"></a>
 
 - *Type:* [`@aws-cdk/aws-ecs.FargateTaskDefinitionProps`](#@aws-cdk/aws-ecs.FargateTaskDefinitionProps)

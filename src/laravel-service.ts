@@ -49,6 +49,10 @@ export interface LaravelProps {
 
   readonly healthCheckPath? : string;
   readonly healthCheckCode? : string;
+
+  readonly environment?: {
+    [key: string]: string;
+  };
 }
 
 export class LaravelService extends cdk.Construct {
@@ -80,9 +84,7 @@ export class LaravelService extends cdk.Construct {
     task.addContainer('Laravel', {
       image: image,
       portMappings: [{ containerPort: props.containerPort ?? 80 }],
-      environment: props.db ? {
-        Laravel_DB_NAME: 'Laravel',
-      } : {},
+      environment: props.environment,
       logging: new ecs.AwsLogDriver({
         streamPrefix: 'Laravel-Service',
         logGroup,
