@@ -947,6 +947,12 @@ https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-erro
 
 ---
 
+##### `secretEnvironment`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.secretEnvironment"></a>
+
+- *Type:* {[ key: string ]: [`@aws-cdk/aws-ecs.Secret`](#@aws-cdk/aws-ecs.Secret)}
+
+---
+
 ##### `spot`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.spot"></a>
 
 - *Type:* `boolean`

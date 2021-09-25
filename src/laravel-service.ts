@@ -53,6 +53,10 @@ export interface LaravelProps {
   readonly environment?: {
     [key: string]: string;
   };
+
+  readonly secretEnvironment?: {
+    [key: string]: ecs.Secret;
+  };
 }
 
 export class LaravelService extends cdk.Construct {
@@ -81,6 +85,7 @@ export class LaravelService extends cdk.Construct {
       image = ecs.ContainerImage.fromAsset(props.code);
     }
 
+
     task.addContainer('Laravel', {
       image: image,
       portMappings: [{ containerPort: props.containerPort ?? 80 }],
@@ -89,20 +94,7 @@ export class LaravelService extends cdk.Construct {
         streamPrefix: 'Laravel-Service',
         logGroup,
       }),
-      secrets: props.db ? {
-        LARAVEL_DB_HOST: ecs.Secret.fromSecretsManager(
-          props.db.secret,
-          'host',
-        ),
-        LARAVEL_DB_USER: ecs.Secret.fromSecretsManager(
-          props.db.secret,
-          'username',
-        ),
-        LARAVEL_DB_PASSWORD: ecs.Secret.fromSecretsManager(
-          props.db.secret,
-          'password',
-        ),
-      } : {},
+      secrets: props.secretEnvironment,
     });
 
     printOutput(this, 'HiiiFromRegistry - ', String(props.fromRegistry));

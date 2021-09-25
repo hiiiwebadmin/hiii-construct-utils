@@ -1151,7 +1151,6 @@ Object {
                 "Protocol": "tcp",
               },
             ],
-            "Secrets": Array [],
           },
         ],
         "Cpu": "512",
