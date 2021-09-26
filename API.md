@@ -625,12 +625,28 @@ The external load balancer idle timeout, in seconds.
 
 ---
 
+##### `externalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.externalAlbName"></a>
+
+- *Type:* `string`
+
+Set Up The external ALB Name.
+
+---
+
 ##### `internalAlbIdleTimeout`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.internalAlbIdleTimeout"></a>
 
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
 - *Default:* 60.
 
 The internal load balancer idle timeout, in seconds.
+
+---
+
+##### `internalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.internalAlbName"></a>
+
+- *Type:* `string`
+
+Set Up The internal ALB Name.
 
 ---
 
@@ -927,6 +943,14 @@ enable ECS Exec.
 
 ---
 
+##### `externalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.externalAlbName"></a>
+
+- *Type:* `string`
+
+Set Up The external ALB Name.
+
+---
+
 ##### `fargateTaskDefinitionProps`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.fargateTaskDefinitionProps"></a>
 
 - *Type:* [`@aws-cdk/aws-ecs.FargateTaskDefinitionProps`](#@aws-cdk/aws-ecs.FargateTaskDefinitionProps)
@@ -944,6 +968,14 @@ https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-erro
 ##### `healthCheckPath`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.healthCheckPath"></a>
 
 - *Type:* `string`
+
+---
+
+##### `internalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.internalAlbName"></a>
+
+- *Type:* `string`
+
+Set Up The internal ALB Name.
 
 ---
 

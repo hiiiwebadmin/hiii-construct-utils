@@ -18,6 +18,16 @@ export interface DualAlbFargateServiceProps extends BaseFargateServiceProps {
    * @default - 60.
   */
   readonly internalAlbIdleTimeout?: cdk.Duration;
+
+  /**
+   * Set Up The external ALB Name
+   */
+  readonly externalAlbName? :string;
+
+  /**
+   * Set Up The internal ALB Name
+   */
+  readonly internalAlbName? :string;
 };
 
 export class DualAlbFargateService extends BaseFargateService {
@@ -34,7 +44,6 @@ export class DualAlbFargateService extends BaseFargateService {
 
   protected internalAlbApplicationListeners: {[key: string]: elbv2.ApplicationListener}
 
-
   constructor(scope: cdk.Construct, id: string, props: DualAlbFargateServiceProps) {
     super(scope, id, props);
 
@@ -43,6 +52,7 @@ export class DualAlbFargateService extends BaseFargateService {
 
     if (this.hasExternalLoadBalancer) {
       this.externalAlb = new elbv2.ApplicationLoadBalancer(this, 'ExternalAlb', {
+        loadBalancerName: props.externalAlbName,
         vpc: this.vpc,
         internetFacing: true,
         idleTimeout: props.externalAlbIdleTimeout,
@@ -51,6 +61,7 @@ export class DualAlbFargateService extends BaseFargateService {
 
     if (this.hasInternalLoadBalancer) {
       this.internalAlb = new elbv2.ApplicationLoadBalancer(this, 'InternalAlb', {
+        loadBalancerName: props.internalAlbName,
         vpc: this.vpc,
         internetFacing: false,
         idleTimeout: props.internalAlbIdleTimeout,

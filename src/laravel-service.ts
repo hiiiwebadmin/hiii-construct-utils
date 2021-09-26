@@ -57,6 +57,15 @@ export interface LaravelProps {
   readonly secretEnvironment?: {
     [key: string]: ecs.Secret;
   };
+
+  /**
+   * Set Up The external ALB Name
+   */
+  readonly externalAlbName? : string;
+  /**
+   * Set Up The internal ALB Name
+   */
+  readonly internalAlbName? : string;
 }
 
 export class LaravelService extends cdk.Construct {
@@ -102,6 +111,8 @@ export class LaravelService extends cdk.Construct {
     printOutput(this, 'HiiihealthCheckPath - ', props.healthCheckPath ? props.healthCheckPath : '/');
 
     this.svc = new DualAlbFargateService(this, 'ALBFargateService', {
+      internalAlbName: props.internalAlbName,
+      externalAlbName: props.externalAlbName,
       vpc: this.vpc,
       spot: props.spot,
       enableExecuteCommand: props.enableExecuteCommand,
