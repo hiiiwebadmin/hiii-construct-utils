@@ -906,6 +906,15 @@ This is the FargateTaskProps below.
 
 ---
 
+##### `cluster`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.cluster"></a>
+
+- *Type:* [`@aws-cdk/aws-ecs.ICluster`](#@aws-cdk/aws-ecs.ICluster)
+- *Default:* create a new ECS Cluster.
+
+Use existing ECS Cluster.
+
+---
+
 ##### `containerPort`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.containerPort"></a>
 
 - *Type:* `number`

@@ -12,6 +12,12 @@ import { getOrCreateVpc, printOutput } from './common/util';
 export interface LaravelProps {
   readonly fromRegistry : boolean;
 
+  /**
+   * Use existing ECS Cluster.
+   * @default - create a new ECS Cluster.
+   */
+  readonly cluster?: ecs.ICluster;
+
   readonly vpc?: ec2.IVpc;
   /**
    * enable fargate spot
