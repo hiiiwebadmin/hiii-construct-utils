@@ -952,6 +952,15 @@ enable ECS Exec.
 
 ---
 
+##### `externalAlbIdleTimeout`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.externalAlbIdleTimeout"></a>
+
+- *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
+- *Default:* 60.
+
+The external load balancer idle timeout, in seconds.
+
+---
+
 ##### `externalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.externalAlbName"></a>
 
 - *Type:* `string`
@@ -977,6 +986,15 @@ https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-erro
 ##### `healthCheckPath`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.healthCheckPath"></a>
 
 - *Type:* `string`
+
+---
+
+##### `internalAlbIdleTimeout`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.internalAlbIdleTimeout"></a>
+
+- *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
+- *Default:* 60.
+
+The internal load balancer idle timeout, in seconds.
 
 ---
 

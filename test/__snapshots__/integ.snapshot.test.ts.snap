@@ -610,6 +610,10 @@ Object {
             "Key": "deletion_protection.enabled",
             "Value": "false",
           },
+          Object {
+            "Key": "idle_timeout.timeout_seconds",
+            "Value": "3600",
+          },
         ],
         "Scheme": "internet-facing",
         "SecurityGroups": Array [

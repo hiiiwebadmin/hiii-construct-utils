@@ -72,6 +72,18 @@ export interface LaravelProps {
    * Set Up The internal ALB Name
    */
   readonly internalAlbName? : string;
+
+  /**
+   * The external load balancer idle timeout, in seconds.
+   * @default - 60.
+  */
+  readonly externalAlbIdleTimeout?: cdk.Duration;
+
+  /**
+   * The internal load balancer idle timeout, in seconds.
+   * @default - 60.
+  */
+  readonly internalAlbIdleTimeout?: cdk.Duration;
 }
 
 export class LaravelService extends cdk.Construct {
@@ -119,6 +131,8 @@ export class LaravelService extends cdk.Construct {
     this.svc = new DualAlbFargateService(this, 'ALBFargateService', {
       internalAlbName: props.internalAlbName,
       externalAlbName: props.externalAlbName,
+      externalAlbIdleTimeout: props.externalAlbIdleTimeout ? props.externalAlbIdleTimeout : cdk.Duration.seconds(3600),
+      internalAlbIdleTimeout: props.internalAlbIdleTimeout ? props.internalAlbIdleTimeout : cdk.Duration.seconds(3600),
       vpc: this.vpc,
       spot: props.spot,
       enableExecuteCommand: props.enableExecuteCommand,
