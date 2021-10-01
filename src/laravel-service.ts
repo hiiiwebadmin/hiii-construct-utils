@@ -133,7 +133,8 @@ export class LaravelService extends cdk.Construct {
       externalAlbName: props.externalAlbName,
       externalAlbIdleTimeout: props.externalAlbIdleTimeout ? props.externalAlbIdleTimeout : cdk.Duration.seconds(3600),
       internalAlbIdleTimeout: props.internalAlbIdleTimeout ? props.internalAlbIdleTimeout : cdk.Duration.seconds(3600),
-      vpc: this.vpc,
+      vpc: props.cluster == null ? this.vpc : undefined,
+      cluster: props.cluster,
       spot: props.spot,
       enableExecuteCommand: props.enableExecuteCommand,
       tasks: [
