@@ -84,6 +84,13 @@ export interface LaravelProps {
    * @default - 60.
   */
   readonly internalAlbIdleTimeout?: cdk.Duration;
+
+
+  /**
+   * Set Deployment Type
+   * @default ecs.DeploymentControllerType.ECS
+  */
+  readonly deployType?: ecs.DeploymentControllerType;
 }
 
 export class LaravelService extends cdk.Construct {
@@ -140,6 +147,7 @@ export class LaravelService extends cdk.Construct {
       tasks: [
         {
           external: props.cert ? { port: 443, certificate: [props.cert] } : { port: 80 },
+          deployType: props.deployType,
           task,
           healthCheck: {
             path: props.healthCheckPath ? props.healthCheckPath : '/',

@@ -775,7 +775,7 @@ Customized capacity provider strategy.
 
 ---
 
-##### `deplyType`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.deplyType"></a>
+##### `deployType`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.deployType"></a>
 
 - *Type:* [`@aws-cdk/aws-ecs.DeploymentControllerType`](#@aws-cdk/aws-ecs.DeploymentControllerType)
 - *Default:* ecs.DeploymentControllerType.ECS
@@ -936,6 +936,15 @@ The Laravel container port.
 ##### `db`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.db"></a>
 
 - *Type:* [`hiii-construct-utils.RdsService`](#hiii-construct-utils.RdsService)
+
+---
+
+##### `deployType`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.deployType"></a>
+
+- *Type:* [`@aws-cdk/aws-ecs.DeploymentControllerType`](#@aws-cdk/aws-ecs.DeploymentControllerType)
+- *Default:* ecs.DeploymentControllerType.ECS
+
+Set Deployment Type.
 
 ---
 

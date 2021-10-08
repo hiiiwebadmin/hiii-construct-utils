@@ -165,7 +165,7 @@ export interface FargateTaskProps {
    * Set Deployment Type
    * @default ecs.DeploymentControllerType.ECS
   */
-  readonly deplyType?: ecs.DeploymentControllerType;
+  readonly deployType?: ecs.DeploymentControllerType;
 }
 
 export interface ServiceScalingPolicy {
@@ -284,7 +284,7 @@ export abstract class BaseFargateService extends cdk.Construct {
       const svc = new ecs.FargateService(this, `${defaultContainerName}Service`, {
         taskDefinition: t.task,
         cluster,
-        deploymentController: t.deplyType ? { type: t.deplyType } : { type: ecs.DeploymentControllerType.ECS },
+        deploymentController: t.deployType ? { type: t.deployType } : { type: ecs.DeploymentControllerType.ECS },
         serviceName: t.serviceName,
         capacityProviderStrategies: t.capacityProviderStrategy ?? ( props.spot ? spotOnlyStrategy : undefined ),
         desiredCount: t.desiredCount,
