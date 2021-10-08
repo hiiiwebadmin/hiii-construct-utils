@@ -160,6 +160,12 @@ export interface FargateTaskProps {
    * @default cdk.Duration.seconds(60),
   */
   readonly healthCheckGracePeriod?: cdk.Duration;
+
+  /**
+   * Set Deployment Type
+   * @default ecs.DeploymentControllerType.ECS
+  */
+  readonly deplyType?: ecs.DeploymentControllerType;
 }
 
 export interface ServiceScalingPolicy {
@@ -278,6 +284,7 @@ export abstract class BaseFargateService extends cdk.Construct {
       const svc = new ecs.FargateService(this, `${defaultContainerName}Service`, {
         taskDefinition: t.task,
         cluster,
+        deploymentController: t.deplyType ? { type: t.deplyType } : { type: ecs.DeploymentControllerType.ECS },
         serviceName: t.serviceName,
         capacityProviderStrategies: t.capacityProviderStrategy ?? ( props.spot ? spotOnlyStrategy : undefined ),
         desiredCount: t.desiredCount,
