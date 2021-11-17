@@ -1024,6 +1024,15 @@ Set Up The internal ALB Name.
 
 ---
 
+##### `logGroupName`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.logGroupName"></a>
+
+- *Type:* `string`
+- *Default:* null
+
+Set Log Group Name.
+
+---
+
 ##### `secretEnvironment`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.secretEnvironment"></a>
 
 - *Type:* {[ key: string ]: [`@aws-cdk/aws-ecs.Secret`](#@aws-cdk/aws-ecs.Secret)}

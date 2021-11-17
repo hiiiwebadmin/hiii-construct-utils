@@ -91,6 +91,13 @@ export interface LaravelProps {
    * @default ecs.DeploymentControllerType.ECS
   */
   readonly deployType?: ecs.DeploymentControllerType;
+
+
+  /**
+   * Set Log Group Name
+   * @default null
+  */
+  readonly logGroupName?: string;
 }
 
 export class LaravelService extends cdk.Construct {
@@ -102,6 +109,7 @@ export class LaravelService extends cdk.Construct {
     this.vpc = props.vpc ?? getOrCreateVpc(this);
 
     const logGroup = new logs.LogGroup(this, 'LogGroup', {
+      logGroupName: props.logGroupName,
       retention: logs.RetentionDays.ONE_MONTH,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
