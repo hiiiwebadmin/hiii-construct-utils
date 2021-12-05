@@ -159,6 +159,7 @@ export class LaravelService extends cdk.Construct {
     printOutput(this, 'HiiihealthCheckPath - ', props.healthCheckPath ? props.healthCheckPath : '/');
 
     this.svc = new DualAlbFargateService(this, 'ALBFargateService', {
+      albSecruityGroup: props.albSecruityGroup,
       fargateServiceSecruityGroups: props.fargateServiceSecruityGroups,
       internalAlbName: props.internalAlbName,
       externalAlbName: props.externalAlbName,

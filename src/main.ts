@@ -295,6 +295,7 @@ export abstract class BaseFargateService extends cdk.Construct {
     props.tasks.forEach(t => {
       const defaultContainerName = t.task.defaultContainer?.containerName;
       const svc = new ecs.FargateService(this, `${defaultContainerName}Service`, {
+        securityGroups: props.fargateServiceSecruityGroups,
         taskDefinition: t.task,
         cluster,
         deploymentController: t.deployType ? { type: t.deployType } : { type: ecs.DeploymentControllerType.ECS },
