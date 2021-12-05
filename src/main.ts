@@ -26,6 +26,14 @@ export interface BaseFargateServiceProps {
   readonly vpc?: ec2.IVpc;
   readonly tasks: FargateTaskProps[];
   readonly route53Ops?: Route53Options;
+
+  /**
+ * The security groups to associate with the fargate service.
+ *
+ * @default - A new security group is created.
+ * @stability stable
+ */
+  readonly fargateServiceSecruityGroups?: ec2.ISecurityGroup[];
   /**
    * create a FARGATE_SPOT only cluster
    * @default false
@@ -166,6 +174,11 @@ export interface FargateTaskProps {
    * @default ecs.DeploymentControllerType.ECS
   */
   readonly deployType?: ecs.DeploymentControllerType;
+
+  /**
+   * To Force Https
+   */
+  readonly forceHttps: boolean;
 }
 
 export interface ServiceScalingPolicy {
@@ -286,7 +299,7 @@ export abstract class BaseFargateService extends cdk.Construct {
         cluster,
         deploymentController: t.deployType ? { type: t.deployType } : { type: ecs.DeploymentControllerType.ECS },
         serviceName: t.serviceName,
-        capacityProviderStrategies: t.capacityProviderStrategy ?? ( props.spot ? spotOnlyStrategy : undefined ),
+        capacityProviderStrategies: t.capacityProviderStrategy ?? (props.spot ? spotOnlyStrategy : undefined),
         desiredCount: t.desiredCount,
         enableExecuteCommand: props.enableExecuteCommand ?? false,
         vpcSubnets: this.vpcSubnets,
@@ -335,7 +348,7 @@ export abstract class BaseFargateService extends cdk.Construct {
     }
   }
   private createSpotTerminationHandler(cluster: ecs.ICluster) {
-  // create the handler
+    // create the handler
     const handler = new lambda.DockerImageFunction(this, 'SpotTermHandler', {
       code: lambda.DockerImageCode.fromImageAsset(path.join(__dirname, '../lambda/spot-term-handler')),
       timeout: cdk.Duration.seconds(20),

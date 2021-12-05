@@ -1,10 +1,11 @@
+import * as ec2 from '@aws-cdk/aws-ec2';
 import * as elbv2 from '@aws-cdk/aws-elasticloadbalancingv2';
+import { ListenerAction } from '@aws-cdk/aws-elasticloadbalancingv2';
 import * as route53 from '@aws-cdk/aws-route53';
 import * as targets from '@aws-cdk/aws-route53-targets';
 import * as cdk from '@aws-cdk/core';
 import { printOutput } from './common/util';
 import { BaseFargateService, BaseFargateServiceProps } from './main';
-
 
 export interface DualAlbFargateServiceProps extends BaseFargateServiceProps {
   /**
@@ -22,12 +23,17 @@ export interface DualAlbFargateServiceProps extends BaseFargateServiceProps {
   /**
    * Set Up The external ALB Name
    */
-  readonly externalAlbName? :string;
+  readonly externalAlbName?: string;
 
   /**
    * Set Up The internal ALB Name
    */
-  readonly internalAlbName? :string;
+  readonly internalAlbName?: string;
+
+  /**
+  * Set Up The internal ALB Name
+  */
+  readonly albSecruityGroup?: ec2.ISecurityGroup;
 };
 
 export class DualAlbFargateService extends BaseFargateService {
@@ -40,9 +46,9 @@ export class DualAlbFargateService extends BaseFargateService {
    */
   readonly internalAlb?: elbv2.ApplicationLoadBalancer
 
-  protected externalAlbApplicationListeners: {[key: string]: elbv2.ApplicationListener}
+  protected externalAlbApplicationListeners: { [key: string]: elbv2.ApplicationListener }
 
-  protected internalAlbApplicationListeners: {[key: string]: elbv2.ApplicationListener}
+  protected internalAlbApplicationListeners: { [key: string]: elbv2.ApplicationListener }
 
   constructor(scope: cdk.Construct, id: string, props: DualAlbFargateServiceProps) {
     super(scope, id, props);
@@ -56,6 +62,7 @@ export class DualAlbFargateService extends BaseFargateService {
         vpc: this.vpc,
         internetFacing: true,
         idleTimeout: props.externalAlbIdleTimeout,
+        securityGroup: props.albSecruityGroup,
       });
     }
 
@@ -65,6 +72,7 @@ export class DualAlbFargateService extends BaseFargateService {
         vpc: this.vpc,
         internetFacing: false,
         idleTimeout: props.internalAlbIdleTimeout,
+        securityGroup: props.albSecruityGroup,
       });
     }
 
@@ -104,6 +112,20 @@ export class DualAlbFargateService extends BaseFargateService {
             defaultTargetGroups: [exttg],
           });
           this.externalAlbApplicationListeners[listenerId] = listener;
+        }
+
+        //增加80強制轉443
+        const forceListenerId = 'ExtAlbListener80';
+        let forceListener = this.externalAlbApplicationListeners[forceListenerId];
+        if (!forceListener && t.external.certificate && t.forceHttps) {
+          forceListener = new elbv2.ApplicationListener(this, forceListenerId, {
+            loadBalancer: this.externalAlb!,
+            open: true,
+            port: 80,
+            protocol: elbv2.ApplicationProtocol.HTTP,
+            defaultAction: ListenerAction.redirect({ port: '443', protocol: elbv2.ApplicationProtocol.HTTPS }),
+          });
+          this.externalAlbApplicationListeners[forceListenerId] = forceListener;
         }
 
         if (t.external.forwardConditions) {

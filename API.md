@@ -398,6 +398,15 @@ Whether to enable ECS Exec support.
 
 ---
 
+##### `fargateServiceSecruityGroups`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.fargateServiceSecruityGroups"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
+- *Default:* A new security group is created.
+
+The security groups to associate with the fargate service.
+
+---
+
 ##### `route53Ops`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.route53Ops"></a>
 
 - *Type:* [`hiii-construct-utils.Route53Options`](#hiii-construct-utils.Route53Options)
@@ -573,6 +582,15 @@ Whether to enable ECS Exec support.
 
 ---
 
+##### `fargateServiceSecruityGroups`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.fargateServiceSecruityGroups"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
+- *Default:* A new security group is created.
+
+The security groups to associate with the fargate service.
+
+---
+
 ##### `route53Ops`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.route53Ops"></a>
 
 - *Type:* [`hiii-construct-utils.Route53Options`](#hiii-construct-utils.Route53Options)
@@ -613,6 +631,14 @@ subnetType: ec2.SubnetType.PRIVATE,
 }
 
 The subnets to associate with the service.
+
+---
+
+##### `albSecruityGroup`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.albSecruityGroup"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)
+
+Set Up The internal ALB Name.
 
 ---
 
@@ -706,6 +732,15 @@ Whether to enable ECS Exec support.
 
 ---
 
+##### `fargateServiceSecruityGroups`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.fargateServiceSecruityGroups"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
+- *Default:* A new security group is created.
+
+The security groups to associate with the fargate service.
+
+---
+
 ##### `route53Ops`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.route53Ops"></a>
 
 - *Type:* [`hiii-construct-utils.Route53Options`](#hiii-construct-utils.Route53Options)
@@ -760,6 +795,14 @@ import { FargateTaskProps } from 'hiii-construct-utils'
 
 const fargateTaskProps: FargateTaskProps = { ... }
 ```
+
+##### `forceHttps`<sup>Required</sup> <a name="hiii-construct-utils.FargateTaskProps.property.forceHttps"></a>
+
+- *Type:* `boolean`
+
+To Force Https.
+
+---
 
 ##### `task`<sup>Required</sup> <a name="hiii-construct-utils.FargateTaskProps.property.task"></a>
 
@@ -907,6 +950,15 @@ The local path to the Laravel code base.
 
 ---
 
+##### `albSecruityGroup`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.albSecruityGroup"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)
+- *Default:* A new security group is created.
+
+The security groups to associate with the Load Balancer.
+
+---
+
 ##### `cert`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.cert"></a>
 
 - *Type:* [`@aws-cdk/aws-certificatemanager.ICertificate`](#@aws-cdk/aws-certificatemanager.ICertificate)
@@ -984,6 +1036,15 @@ The external load balancer idle timeout, in seconds.
 - *Type:* `string`
 
 Set Up The external ALB Name.
+
+---
+
+##### `fargateServiceSecruityGroups`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.fargateServiceSecruityGroups"></a>
+
+- *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
+- *Default:* A new security group is created.
+
+The security groups to associate with the fargate service.
 
 ---
 

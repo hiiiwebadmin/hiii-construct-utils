@@ -10,7 +10,7 @@ import { getOrCreateVpc, printOutput } from './common/util';
 
 
 export interface LaravelProps {
-  readonly fromRegistry : boolean;
+  readonly fromRegistry: boolean;
 
   /**
    * Use existing ECS Cluster.
@@ -46,15 +46,16 @@ export interface LaravelProps {
   /**
    * https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html
   */
-  readonly fargateTaskDefinitionProps? : ecs.FargateTaskDefinitionProps;
+  readonly fargateTaskDefinitionProps?: ecs.FargateTaskDefinitionProps;
 
   /**
   *This is the FargateTaskProps below
   */
-  readonly cert? : acm.ICertificate;
 
-  readonly healthCheckPath? : string;
-  readonly healthCheckCode? : string;
+  readonly cert?: acm.ICertificate;
+
+  readonly healthCheckPath?: string;
+  readonly healthCheckCode?: string;
 
   readonly environment?: {
     [key: string]: string;
@@ -67,11 +68,11 @@ export interface LaravelProps {
   /**
    * Set Up The external ALB Name
    */
-  readonly externalAlbName? : string;
+  readonly externalAlbName?: string;
   /**
    * Set Up The internal ALB Name
    */
-  readonly internalAlbName? : string;
+  readonly internalAlbName?: string;
 
   /**
    * The external load balancer idle timeout, in seconds.
@@ -98,6 +99,21 @@ export interface LaravelProps {
    * @default null
   */
   readonly logGroupName?: string;
+
+  /**
+ * The security groups to associate with the fargate service.
+ *
+ * @default - A new security group is created.
+ */
+  readonly fargateServiceSecruityGroups?: ec2.ISecurityGroup[];
+
+
+  /**
+* The security groups to associate with the Load Balancer.
+*
+* @default - A new security group is created.
+*/
+  readonly albSecruityGroup?: ec2.ISecurityGroup;
 }
 
 export class LaravelService extends cdk.Construct {
@@ -127,7 +143,6 @@ export class LaravelService extends cdk.Construct {
       image = ecs.ContainerImage.fromAsset(props.code);
     }
 
-
     task.addContainer('Laravel', {
       image: image,
       portMappings: [{ containerPort: props.containerPort ?? 80 }],
@@ -144,6 +159,7 @@ export class LaravelService extends cdk.Construct {
     printOutput(this, 'HiiihealthCheckPath - ', props.healthCheckPath ? props.healthCheckPath : '/');
 
     this.svc = new DualAlbFargateService(this, 'ALBFargateService', {
+      fargateServiceSecruityGroups: props.fargateServiceSecruityGroups,
       internalAlbName: props.internalAlbName,
       externalAlbName: props.externalAlbName,
       externalAlbIdleTimeout: props.externalAlbIdleTimeout ? props.externalAlbIdleTimeout : cdk.Duration.seconds(3600),
@@ -154,6 +170,7 @@ export class LaravelService extends cdk.Construct {
       enableExecuteCommand: props.enableExecuteCommand,
       tasks: [
         {
+          forceHttps: props.cert != null,
           external: props.cert ? { port: 443, certificate: [props.cert] } : { port: 80 },
           deployType: props.deployType,
           task,
