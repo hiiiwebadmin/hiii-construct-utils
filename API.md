@@ -36,6 +36,10 @@ new BaseFargateService(scope: Construct, id: string, props: BaseFargateServicePr
 
 ##### `service`<sup>Required</sup> <a name="hiii-construct-utils.BaseFargateService.property.service"></a>
 
+```typescript
+public readonly service: FargateService[];
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.FargateService`](#@aws-cdk/aws-ecs.FargateService)[]
 
 The service(s) created from the task(s).
@@ -43,6 +47,10 @@ The service(s) created from the task(s).
 ---
 
 ##### `vpc`<sup>Required</sup> <a name="hiii-construct-utils.BaseFargateService.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
@@ -117,6 +125,10 @@ new DualAlbFargateService(scope: Construct, id: string, props: DualAlbFargateSer
 
 ##### `externalAlb`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateService.property.externalAlb"></a>
 
+```typescript
+public readonly externalAlb: ApplicationLoadBalancer;
+```
+
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.ApplicationLoadBalancer`](#@aws-cdk/aws-elasticloadbalancingv2.ApplicationLoadBalancer)
 
 The external ALB.
@@ -124,6 +136,10 @@ The external ALB.
 ---
 
 ##### `internalAlb`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateService.property.internalAlb"></a>
+
+```typescript
+public readonly internalAlb: ApplicationLoadBalancer;
+```
 
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.ApplicationLoadBalancer`](#@aws-cdk/aws-elasticloadbalancingv2.ApplicationLoadBalancer)
 
@@ -166,6 +182,10 @@ new DualNlbFargateService(scope: Construct, id: string, props: DualNlbFargateSer
 
 ##### `externalNlb`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateService.property.externalNlb"></a>
 
+```typescript
+public readonly externalNlb: NetworkLoadBalancer;
+```
+
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.NetworkLoadBalancer`](#@aws-cdk/aws-elasticloadbalancingv2.NetworkLoadBalancer)
 
 The external Nlb.
@@ -173,6 +193,10 @@ The external Nlb.
 ---
 
 ##### `internalNlb`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateService.property.internalNlb"></a>
+
+```typescript
+public readonly internalNlb: NetworkLoadBalancer;
+```
 
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.NetworkLoadBalancer`](#@aws-cdk/aws-elasticloadbalancingv2.NetworkLoadBalancer)
 
@@ -215,11 +239,19 @@ new LaravelService(scope: Construct, id: string, props: LaravelProps)
 
 ##### `svc`<sup>Required</sup> <a name="hiii-construct-utils.LaravelService.property.svc"></a>
 
+```typescript
+public readonly svc: DualAlbFargateService;
+```
+
 - *Type:* [`hiii-construct-utils.DualAlbFargateService`](#hiii-construct-utils.DualAlbFargateService)
 
 ---
 
 ##### `vpc`<sup>Required</sup> <a name="hiii-construct-utils.LaravelService.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
@@ -260,11 +292,19 @@ new RdsService(scope: Construct, id: string, props: RdsServiceProps)
 
 ##### `clusterEndpointHostname`<sup>Required</sup> <a name="hiii-construct-utils.RdsService.property.clusterEndpointHostname"></a>
 
+```typescript
+public readonly clusterEndpointHostname: string;
+```
+
 - *Type:* `string`
 
 ---
 
 ##### `clusterIdentifier`<sup>Required</sup> <a name="hiii-construct-utils.RdsService.property.clusterIdentifier"></a>
+
+```typescript
+public readonly clusterIdentifier: string;
+```
 
 - *Type:* `string`
 
@@ -272,11 +312,19 @@ new RdsService(scope: Construct, id: string, props: RdsServiceProps)
 
 ##### `connections`<sup>Required</sup> <a name="hiii-construct-utils.RdsService.property.connections"></a>
 
+```typescript
+public readonly connections: Connections;
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.Connections`](#@aws-cdk/aws-ec2.Connections)
 
 ---
 
 ##### `secret`<sup>Required</sup> <a name="hiii-construct-utils.RdsService.property.secret"></a>
+
+```typescript
+public readonly secret: ISecret;
+```
 
 - *Type:* [`@aws-cdk/aws-secretsmanager.ISecret`](#@aws-cdk/aws-secretsmanager.ISecret)
 
@@ -317,11 +365,19 @@ new S3Service(scope: Construct, id: string, props: S3ServiceProps)
 
 ##### `bucketArn`<sup>Required</sup> <a name="hiii-construct-utils.S3Service.property.bucketArn"></a>
 
+```typescript
+public readonly bucketArn: string;
+```
+
 - *Type:* `string`
 
 ---
 
 ##### `bucketName`<sup>Required</sup> <a name="hiii-construct-utils.S3Service.property.bucketName"></a>
+
+```typescript
+public readonly bucketName: string;
+```
 
 - *Type:* `string`
 
@@ -329,11 +385,19 @@ new S3Service(scope: Construct, id: string, props: S3ServiceProps)
 
 ##### `bucketRegionalDomainName`<sup>Required</sup> <a name="hiii-construct-utils.S3Service.property.bucketRegionalDomainName"></a>
 
+```typescript
+public readonly bucketRegionalDomainName: string;
+```
+
 - *Type:* `string`
 
 ---
 
 ##### `bucketWebsiteUrl`<sup>Required</sup> <a name="hiii-construct-utils.S3Service.property.bucketWebsiteUrl"></a>
+
+```typescript
+public readonly bucketWebsiteUrl: string;
+```
 
 - *Type:* `string`
 
@@ -354,11 +418,19 @@ const baseFargateServiceProps: BaseFargateServiceProps = { ... }
 
 ##### `tasks`<sup>Required</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.tasks"></a>
 
+```typescript
+public readonly tasks: FargateTaskProps[];
+```
+
 - *Type:* [`hiii-construct-utils.FargateTaskProps`](#hiii-construct-utils.FargateTaskProps)[]
 
 ---
 
 ##### `circuitBreaker`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.circuitBreaker"></a>
+
+```typescript
+public readonly circuitBreaker: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* true
@@ -371,6 +443,10 @@ Enable the ECS service circuit breaker.
 
 ##### `cluster`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.cluster"></a>
 
+```typescript
+public readonly cluster: ICluster;
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.ICluster`](#@aws-cdk/aws-ecs.ICluster)
 - *Default:* create a new ECS Cluster.
 
@@ -380,6 +456,10 @@ Use existing ECS Cluster.
 
 ##### `clusterProps`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.clusterProps"></a>
 
+```typescript
+public readonly clusterProps: ClusterProps;
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.ClusterProps`](#@aws-cdk/aws-ecs.ClusterProps)
 - *Default:* Create vpc and enable Fargate Capacity Providers.
 
@@ -388,6 +468,10 @@ The properties used to define an ECS cluster.
 ---
 
 ##### `enableExecuteCommand`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.enableExecuteCommand"></a>
+
+```typescript
+public readonly enableExecuteCommand: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* false
@@ -400,6 +484,10 @@ Whether to enable ECS Exec support.
 
 ##### `fargateServiceSecruityGroups`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.fargateServiceSecruityGroups"></a>
 
+```typescript
+public readonly fargateServiceSecruityGroups: ISecurityGroup[];
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
 - *Default:* A new security group is created.
 
@@ -409,11 +497,19 @@ The security groups to associate with the fargate service.
 
 ##### `route53Ops`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.route53Ops"></a>
 
+```typescript
+public readonly route53Ops: Route53Options;
+```
+
 - *Type:* [`hiii-construct-utils.Route53Options`](#hiii-construct-utils.Route53Options)
 
 ---
 
 ##### `spot`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.spot"></a>
+
+```typescript
+public readonly spot: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* false
@@ -423,6 +519,10 @@ create a FARGATE_SPOT only cluster.
 ---
 
 ##### `spotTerminationHandler`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.spotTerminationHandler"></a>
+
+```typescript
+public readonly spotTerminationHandler: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* true
@@ -435,11 +535,19 @@ Enable the fargate spot termination handler.
 
 ##### `vpc`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.vpc"></a>
 
+```typescript
+public readonly vpc: IVpc;
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
 ---
 
 ##### `vpcSubnets`<sup>Optional</sup> <a name="hiii-construct-utils.BaseFargateServiceProps.property.vpcSubnets"></a>
+
+```typescript
+public readonly vpcSubnets: SubnetSelection;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.SubnetSelection`](#@aws-cdk/aws-ec2.SubnetSelection)
 - *Default:* {
@@ -462,11 +570,19 @@ const cNameProps: CNameProps = { ... }
 
 ##### `elbv2`<sup>Required</sup> <a name="hiii-construct-utils.CNameProps.property.elbv2"></a>
 
+```typescript
+public readonly elbv2: ApplicationLoadBalancer;
+```
+
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.ApplicationLoadBalancer`](#@aws-cdk/aws-elasticloadbalancingv2.ApplicationLoadBalancer)
 
 ---
 
 ##### `hostZoneId`<sup>Required</sup> <a name="hiii-construct-utils.CNameProps.property.hostZoneId"></a>
+
+```typescript
+public readonly hostZoneId: string;
+```
 
 - *Type:* `string`
 
@@ -474,11 +590,19 @@ const cNameProps: CNameProps = { ... }
 
 ##### `recordName`<sup>Required</sup> <a name="hiii-construct-utils.CNameProps.property.recordName"></a>
 
+```typescript
+public readonly recordName: string;
+```
+
 - *Type:* `string`
 
 ---
 
 ##### `zoneName`<sup>Required</sup> <a name="hiii-construct-utils.CNameProps.property.zoneName"></a>
+
+```typescript
+public readonly zoneName: string;
+```
 
 - *Type:* `string`
 
@@ -496,6 +620,10 @@ const databaseCofig: DatabaseCofig = { ... }
 
 ##### `connections`<sup>Required</sup> <a name="hiii-construct-utils.DatabaseCofig.property.connections"></a>
 
+```typescript
+public readonly connections: Connections;
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.Connections`](#@aws-cdk/aws-ec2.Connections)
 
 The database connnections.
@@ -503,6 +631,10 @@ The database connnections.
 ---
 
 ##### `endpoint`<sup>Required</sup> <a name="hiii-construct-utils.DatabaseCofig.property.endpoint"></a>
+
+```typescript
+public readonly endpoint: string;
+```
 
 - *Type:* `string`
 
@@ -512,6 +644,10 @@ The endpoint address for the database.
 
 ##### `identifier`<sup>Required</sup> <a name="hiii-construct-utils.DatabaseCofig.property.identifier"></a>
 
+```typescript
+public readonly identifier: string;
+```
+
 - *Type:* `string`
 
 The databasae identifier.
@@ -519,6 +655,10 @@ The databasae identifier.
 ---
 
 ##### `secret`<sup>Required</sup> <a name="hiii-construct-utils.DatabaseCofig.property.secret"></a>
+
+```typescript
+public readonly secret: ISecret;
+```
 
 - *Type:* [`@aws-cdk/aws-secretsmanager.ISecret`](#@aws-cdk/aws-secretsmanager.ISecret)
 
@@ -538,11 +678,19 @@ const dualAlbFargateServiceProps: DualAlbFargateServiceProps = { ... }
 
 ##### `tasks`<sup>Required</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.tasks"></a>
 
+```typescript
+public readonly tasks: FargateTaskProps[];
+```
+
 - *Type:* [`hiii-construct-utils.FargateTaskProps`](#hiii-construct-utils.FargateTaskProps)[]
 
 ---
 
 ##### `circuitBreaker`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.circuitBreaker"></a>
+
+```typescript
+public readonly circuitBreaker: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* true
@@ -555,6 +703,10 @@ Enable the ECS service circuit breaker.
 
 ##### `cluster`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.cluster"></a>
 
+```typescript
+public readonly cluster: ICluster;
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.ICluster`](#@aws-cdk/aws-ecs.ICluster)
 - *Default:* create a new ECS Cluster.
 
@@ -564,6 +716,10 @@ Use existing ECS Cluster.
 
 ##### `clusterProps`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.clusterProps"></a>
 
+```typescript
+public readonly clusterProps: ClusterProps;
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.ClusterProps`](#@aws-cdk/aws-ecs.ClusterProps)
 - *Default:* Create vpc and enable Fargate Capacity Providers.
 
@@ -572,6 +728,10 @@ The properties used to define an ECS cluster.
 ---
 
 ##### `enableExecuteCommand`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.enableExecuteCommand"></a>
+
+```typescript
+public readonly enableExecuteCommand: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* false
@@ -584,6 +744,10 @@ Whether to enable ECS Exec support.
 
 ##### `fargateServiceSecruityGroups`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.fargateServiceSecruityGroups"></a>
 
+```typescript
+public readonly fargateServiceSecruityGroups: ISecurityGroup[];
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
 - *Default:* A new security group is created.
 
@@ -593,11 +757,19 @@ The security groups to associate with the fargate service.
 
 ##### `route53Ops`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.route53Ops"></a>
 
+```typescript
+public readonly route53Ops: Route53Options;
+```
+
 - *Type:* [`hiii-construct-utils.Route53Options`](#hiii-construct-utils.Route53Options)
 
 ---
 
 ##### `spot`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.spot"></a>
+
+```typescript
+public readonly spot: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* false
@@ -607,6 +779,10 @@ create a FARGATE_SPOT only cluster.
 ---
 
 ##### `spotTerminationHandler`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.spotTerminationHandler"></a>
+
+```typescript
+public readonly spotTerminationHandler: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* true
@@ -619,11 +795,19 @@ Enable the fargate spot termination handler.
 
 ##### `vpc`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.vpc"></a>
 
+```typescript
+public readonly vpc: IVpc;
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
 ---
 
 ##### `vpcSubnets`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.vpcSubnets"></a>
+
+```typescript
+public readonly vpcSubnets: SubnetSelection;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.SubnetSelection`](#@aws-cdk/aws-ec2.SubnetSelection)
 - *Default:* {
@@ -636,6 +820,10 @@ The subnets to associate with the service.
 
 ##### `albSecruityGroup`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.albSecruityGroup"></a>
 
+```typescript
+public readonly albSecruityGroup: ISecurityGroup;
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)
 
 Set Up The internal ALB Name.
@@ -643,6 +831,10 @@ Set Up The internal ALB Name.
 ---
 
 ##### `externalAlbIdleTimeout`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.externalAlbIdleTimeout"></a>
+
+```typescript
+public readonly externalAlbIdleTimeout: Duration;
+```
 
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
 - *Default:* 60.
@@ -653,6 +845,10 @@ The external load balancer idle timeout, in seconds.
 
 ##### `externalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.externalAlbName"></a>
 
+```typescript
+public readonly externalAlbName: string;
+```
+
 - *Type:* `string`
 
 Set Up The external ALB Name.
@@ -660,6 +856,10 @@ Set Up The external ALB Name.
 ---
 
 ##### `internalAlbIdleTimeout`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.internalAlbIdleTimeout"></a>
+
+```typescript
+public readonly internalAlbIdleTimeout: Duration;
+```
 
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
 - *Default:* 60.
@@ -669,6 +869,10 @@ The internal load balancer idle timeout, in seconds.
 ---
 
 ##### `internalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.DualAlbFargateServiceProps.property.internalAlbName"></a>
+
+```typescript
+public readonly internalAlbName: string;
+```
 
 - *Type:* `string`
 
@@ -688,11 +892,19 @@ const dualNlbFargateServiceProps: DualNlbFargateServiceProps = { ... }
 
 ##### `tasks`<sup>Required</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.tasks"></a>
 
+```typescript
+public readonly tasks: FargateTaskProps[];
+```
+
 - *Type:* [`hiii-construct-utils.FargateTaskProps`](#hiii-construct-utils.FargateTaskProps)[]
 
 ---
 
 ##### `circuitBreaker`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.circuitBreaker"></a>
+
+```typescript
+public readonly circuitBreaker: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* true
@@ -705,6 +917,10 @@ Enable the ECS service circuit breaker.
 
 ##### `cluster`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.cluster"></a>
 
+```typescript
+public readonly cluster: ICluster;
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.ICluster`](#@aws-cdk/aws-ecs.ICluster)
 - *Default:* create a new ECS Cluster.
 
@@ -714,6 +930,10 @@ Use existing ECS Cluster.
 
 ##### `clusterProps`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.clusterProps"></a>
 
+```typescript
+public readonly clusterProps: ClusterProps;
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.ClusterProps`](#@aws-cdk/aws-ecs.ClusterProps)
 - *Default:* Create vpc and enable Fargate Capacity Providers.
 
@@ -722,6 +942,10 @@ The properties used to define an ECS cluster.
 ---
 
 ##### `enableExecuteCommand`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.enableExecuteCommand"></a>
+
+```typescript
+public readonly enableExecuteCommand: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* false
@@ -734,6 +958,10 @@ Whether to enable ECS Exec support.
 
 ##### `fargateServiceSecruityGroups`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.fargateServiceSecruityGroups"></a>
 
+```typescript
+public readonly fargateServiceSecruityGroups: ISecurityGroup[];
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
 - *Default:* A new security group is created.
 
@@ -743,11 +971,19 @@ The security groups to associate with the fargate service.
 
 ##### `route53Ops`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.route53Ops"></a>
 
+```typescript
+public readonly route53Ops: Route53Options;
+```
+
 - *Type:* [`hiii-construct-utils.Route53Options`](#hiii-construct-utils.Route53Options)
 
 ---
 
 ##### `spot`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.spot"></a>
+
+```typescript
+public readonly spot: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* false
@@ -757,6 +993,10 @@ create a FARGATE_SPOT only cluster.
 ---
 
 ##### `spotTerminationHandler`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.spotTerminationHandler"></a>
+
+```typescript
+public readonly spotTerminationHandler: boolean;
+```
 
 - *Type:* `boolean`
 - *Default:* true
@@ -769,11 +1009,19 @@ Enable the fargate spot termination handler.
 
 ##### `vpc`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.vpc"></a>
 
+```typescript
+public readonly vpc: IVpc;
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
 ---
 
 ##### `vpcSubnets`<sup>Optional</sup> <a name="hiii-construct-utils.DualNlbFargateServiceProps.property.vpcSubnets"></a>
+
+```typescript
+public readonly vpcSubnets: SubnetSelection;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.SubnetSelection`](#@aws-cdk/aws-ec2.SubnetSelection)
 - *Default:* {
@@ -798,6 +1046,10 @@ const fargateTaskProps: FargateTaskProps = { ... }
 
 ##### `forceHttps`<sup>Required</sup> <a name="hiii-construct-utils.FargateTaskProps.property.forceHttps"></a>
 
+```typescript
+public readonly forceHttps: boolean;
+```
+
 - *Type:* `boolean`
 
 To Force Https.
@@ -806,11 +1058,19 @@ To Force Https.
 
 ##### `task`<sup>Required</sup> <a name="hiii-construct-utils.FargateTaskProps.property.task"></a>
 
+```typescript
+public readonly task: FargateTaskDefinition;
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.FargateTaskDefinition`](#@aws-cdk/aws-ecs.FargateTaskDefinition)
 
 ---
 
 ##### `capacityProviderStrategy`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.capacityProviderStrategy"></a>
+
+```typescript
+public readonly capacityProviderStrategy: CapacityProviderStrategy[];
+```
 
 - *Type:* [`@aws-cdk/aws-ecs.CapacityProviderStrategy`](#@aws-cdk/aws-ecs.CapacityProviderStrategy)[]
 
@@ -819,6 +1079,10 @@ Customized capacity provider strategy.
 ---
 
 ##### `deployType`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.deployType"></a>
+
+```typescript
+public readonly deployType: DeploymentControllerType;
+```
 
 - *Type:* [`@aws-cdk/aws-ecs.DeploymentControllerType`](#@aws-cdk/aws-ecs.DeploymentControllerType)
 - *Default:* ecs.DeploymentControllerType.ECS
@@ -829,6 +1093,10 @@ Set Deployment Type.
 
 ##### `desiredCount`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.desiredCount"></a>
 
+```typescript
+public readonly desiredCount: number;
+```
+
 - *Type:* `number`
 - *Default:* 1
 
@@ -837,6 +1105,10 @@ desired number of tasks for the service.
 ---
 
 ##### `external`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.external"></a>
+
+```typescript
+public readonly external: LoadBalancerAccessibility;
+```
 
 - *Type:* [`hiii-construct-utils.LoadBalancerAccessibility`](#hiii-construct-utils.LoadBalancerAccessibility)
 - *Default:* no external listener
@@ -847,6 +1119,10 @@ The external ELB listener.
 
 ##### `healthCheck`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.healthCheck"></a>
 
+```typescript
+public readonly healthCheck: HealthCheck;
+```
+
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.HealthCheck`](#@aws-cdk/aws-elasticloadbalancingv2.HealthCheck)
 
 health check from elbv2 target group.
@@ -854,6 +1130,10 @@ health check from elbv2 target group.
 ---
 
 ##### `healthCheckGracePeriod`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.healthCheckGracePeriod"></a>
+
+```typescript
+public readonly healthCheckGracePeriod: Duration;
+```
 
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
 - *Default:* cdk.Duration.seconds(60),
@@ -864,6 +1144,10 @@ The period of time, in seconds, that the Amazon ECS service scheduler ignores un
 
 ##### `internal`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.internal"></a>
 
+```typescript
+public readonly internal: LoadBalancerAccessibility;
+```
+
 - *Type:* [`hiii-construct-utils.LoadBalancerAccessibility`](#hiii-construct-utils.LoadBalancerAccessibility)
 - *Default:* no internal listener
 
@@ -872,6 +1156,10 @@ The internal ELB listener.
 ---
 
 ##### `maxHealthyPercent`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.maxHealthyPercent"></a>
+
+```typescript
+public readonly maxHealthyPercent: number;
+```
 
 - *Type:* `number`
 - *Default:* 200
@@ -882,6 +1170,10 @@ The maximum number of tasks, specified as a percentage of the Amazon ECS service
 
 ##### `minHealthyPercent`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.minHealthyPercent"></a>
 
+```typescript
+public readonly minHealthyPercent: number;
+```
+
 - *Type:* `number`
 - *Default:* 50
 
@@ -890,6 +1182,10 @@ The minimum number of tasks, specified as a percentage of the Amazon ECS service
 ---
 
 ##### `protocol`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.protocol"></a>
+
+```typescript
+public readonly protocol: Protocol;
+```
 
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.Protocol`](#@aws-cdk/aws-elasticloadbalancingv2.Protocol)
 - *Default:* TCP
@@ -902,6 +1198,10 @@ For ALB, this option will be ignored and always set to HTTP.
 
 ##### `protocolVersion`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.protocolVersion"></a>
 
+```typescript
+public readonly protocolVersion: ApplicationProtocolVersion;
+```
+
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.ApplicationProtocolVersion`](#@aws-cdk/aws-elasticloadbalancingv2.ApplicationProtocolVersion)
 
 The protocol version to use.
@@ -909,6 +1209,10 @@ The protocol version to use.
 ---
 
 ##### `scalingPolicy`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.scalingPolicy"></a>
+
+```typescript
+public readonly scalingPolicy: ServiceScalingPolicy;
+```
 
 - *Type:* [`hiii-construct-utils.ServiceScalingPolicy`](#hiii-construct-utils.ServiceScalingPolicy)
 - *Default:* { maxCapacity: 10, targetCpuUtilization: 50, requestsPerTarget: 1000 }
@@ -918,6 +1222,10 @@ service autoscaling policy.
 ---
 
 ##### `serviceName`<sup>Optional</sup> <a name="hiii-construct-utils.FargateTaskProps.property.serviceName"></a>
+
+```typescript
+public readonly serviceName: string;
+```
 
 - *Type:* `string`
 - *Default:* auto-generated
@@ -938,6 +1246,10 @@ const laravelProps: LaravelProps = { ... }
 
 ##### `code`<sup>Required</sup> <a name="hiii-construct-utils.LaravelProps.property.code"></a>
 
+```typescript
+public readonly code: string;
+```
+
 - *Type:* `string`
 
 The local path to the Laravel code base.
@@ -946,11 +1258,19 @@ The local path to the Laravel code base.
 
 ##### `fromRegistry`<sup>Required</sup> <a name="hiii-construct-utils.LaravelProps.property.fromRegistry"></a>
 
+```typescript
+public readonly fromRegistry: boolean;
+```
+
 - *Type:* `boolean`
 
 ---
 
 ##### `albSecruityGroup`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.albSecruityGroup"></a>
+
+```typescript
+public readonly albSecruityGroup: ISecurityGroup;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)
 - *Default:* A new security group is created.
@@ -961,6 +1281,10 @@ The security groups to associate with the Load Balancer.
 
 ##### `cert`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.cert"></a>
 
+```typescript
+public readonly cert: ICertificate;
+```
+
 - *Type:* [`@aws-cdk/aws-certificatemanager.ICertificate`](#@aws-cdk/aws-certificatemanager.ICertificate)
 
 This is the FargateTaskProps below.
@@ -968,6 +1292,10 @@ This is the FargateTaskProps below.
 ---
 
 ##### `cluster`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.cluster"></a>
+
+```typescript
+public readonly cluster: ICluster;
+```
 
 - *Type:* [`@aws-cdk/aws-ecs.ICluster`](#@aws-cdk/aws-ecs.ICluster)
 - *Default:* create a new ECS Cluster.
@@ -978,6 +1306,10 @@ Use existing ECS Cluster.
 
 ##### `containerPort`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.containerPort"></a>
 
+```typescript
+public readonly containerPort: number;
+```
+
 - *Type:* `number`
 - *Default:* 80
 
@@ -987,11 +1319,19 @@ The Laravel container port.
 
 ##### `db`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.db"></a>
 
+```typescript
+public readonly db: RdsService;
+```
+
 - *Type:* [`hiii-construct-utils.RdsService`](#hiii-construct-utils.RdsService)
 
 ---
 
 ##### `deployType`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.deployType"></a>
+
+```typescript
+public readonly deployType: DeploymentControllerType;
+```
 
 - *Type:* [`@aws-cdk/aws-ecs.DeploymentControllerType`](#@aws-cdk/aws-ecs.DeploymentControllerType)
 - *Default:* ecs.DeploymentControllerType.ECS
@@ -1002,6 +1342,10 @@ Set Deployment Type.
 
 ##### `efsFileSystem`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.efsFileSystem"></a>
 
+```typescript
+public readonly efsFileSystem: FileSystemProps;
+```
+
 - *Type:* [`@aws-cdk/aws-efs.FileSystemProps`](#@aws-cdk/aws-efs.FileSystemProps)
 
 Options to create the EFS FileSystem.
@@ -1009,6 +1353,10 @@ Options to create the EFS FileSystem.
 ---
 
 ##### `enableExecuteCommand`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.enableExecuteCommand"></a>
+
+```typescript
+public readonly enableExecuteCommand: boolean;
+```
 
 - *Type:* `boolean`
 
@@ -1018,11 +1366,19 @@ enable ECS Exec.
 
 ##### `environment`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.environment"></a>
 
+```typescript
+public readonly environment: {[ key: string ]: string};
+```
+
 - *Type:* {[ key: string ]: `string`}
 
 ---
 
 ##### `externalAlbIdleTimeout`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.externalAlbIdleTimeout"></a>
+
+```typescript
+public readonly externalAlbIdleTimeout: Duration;
+```
 
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
 - *Default:* 60.
@@ -1033,6 +1389,10 @@ The external load balancer idle timeout, in seconds.
 
 ##### `externalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.externalAlbName"></a>
 
+```typescript
+public readonly externalAlbName: string;
+```
+
 - *Type:* `string`
 
 Set Up The external ALB Name.
@@ -1040,6 +1400,10 @@ Set Up The external ALB Name.
 ---
 
 ##### `fargateServiceSecruityGroups`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.fargateServiceSecruityGroups"></a>
+
+```typescript
+public readonly fargateServiceSecruityGroups: ISecurityGroup[];
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
 - *Default:* A new security group is created.
@@ -1050,6 +1414,10 @@ The security groups to associate with the fargate service.
 
 ##### `fargateTaskDefinitionProps`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.fargateTaskDefinitionProps"></a>
 
+```typescript
+public readonly fargateTaskDefinitionProps: FargateTaskDefinitionProps;
+```
+
 - *Type:* [`@aws-cdk/aws-ecs.FargateTaskDefinitionProps`](#@aws-cdk/aws-ecs.FargateTaskDefinitionProps)
 
 https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-error.html.
@@ -1058,17 +1426,29 @@ https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-cpu-memory-erro
 
 ##### `healthCheckCode`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.healthCheckCode"></a>
 
+```typescript
+public readonly healthCheckCode: string;
+```
+
 - *Type:* `string`
 
 ---
 
 ##### `healthCheckPath`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.healthCheckPath"></a>
 
+```typescript
+public readonly healthCheckPath: string;
+```
+
 - *Type:* `string`
 
 ---
 
 ##### `internalAlbIdleTimeout`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.internalAlbIdleTimeout"></a>
+
+```typescript
+public readonly internalAlbIdleTimeout: Duration;
+```
 
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
 - *Default:* 60.
@@ -1079,6 +1459,10 @@ The internal load balancer idle timeout, in seconds.
 
 ##### `internalAlbName`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.internalAlbName"></a>
 
+```typescript
+public readonly internalAlbName: string;
+```
+
 - *Type:* `string`
 
 Set Up The internal ALB Name.
@@ -1086,6 +1470,10 @@ Set Up The internal ALB Name.
 ---
 
 ##### `logGroupName`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.logGroupName"></a>
+
+```typescript
+public readonly logGroupName: string;
+```
 
 - *Type:* `string`
 - *Default:* null
@@ -1096,11 +1484,19 @@ Set Log Group Name.
 
 ##### `secretEnvironment`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.secretEnvironment"></a>
 
+```typescript
+public readonly secretEnvironment: {[ key: string ]: Secret};
+```
+
 - *Type:* {[ key: string ]: [`@aws-cdk/aws-ecs.Secret`](#@aws-cdk/aws-ecs.Secret)}
 
 ---
 
 ##### `spot`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.spot"></a>
+
+```typescript
+public readonly spot: boolean;
+```
 
 - *Type:* `boolean`
 
@@ -1109,6 +1505,10 @@ enable fargate spot.
 ---
 
 ##### `vpc`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
@@ -1128,6 +1528,10 @@ const loadBalancerAccessibility: LoadBalancerAccessibility = { ... }
 
 ##### `port`<sup>Required</sup> <a name="hiii-construct-utils.LoadBalancerAccessibility.property.port"></a>
 
+```typescript
+public readonly port: number;
+```
+
 - *Type:* `number`
 
 The port of the listener.
@@ -1135,6 +1539,10 @@ The port of the listener.
 ---
 
 ##### `certificate`<sup>Optional</sup> <a name="hiii-construct-utils.LoadBalancerAccessibility.property.certificate"></a>
+
+```typescript
+public readonly certificate: ICertificate[];
+```
 
 - *Type:* [`@aws-cdk/aws-certificatemanager.ICertificate`](#@aws-cdk/aws-certificatemanager.ICertificate)[]
 - *Default:* no certificate(HTTP only)
@@ -1144,6 +1552,10 @@ The ACM certificate for the HTTPS listener.
 ---
 
 ##### `forwardConditions`<sup>Optional</sup> <a name="hiii-construct-utils.LoadBalancerAccessibility.property.forwardConditions"></a>
+
+```typescript
+public readonly forwardConditions: ListenerCondition[];
+```
 
 - *Type:* [`@aws-cdk/aws-elasticloadbalancingv2.ListenerCondition`](#@aws-cdk/aws-elasticloadbalancingv2.ListenerCondition)[]
 - *Default:* no forward conditions.
@@ -1164,11 +1576,19 @@ const rdsServiceProps: RdsServiceProps = { ... }
 
 ##### `cluster`<sup>Required</sup> <a name="hiii-construct-utils.RdsServiceProps.property.cluster"></a>
 
+```typescript
+public readonly cluster: boolean;
+```
+
 - *Type:* `boolean`
 
 ---
 
 ##### `username`<sup>Required</sup> <a name="hiii-construct-utils.RdsServiceProps.property.username"></a>
+
+```typescript
+public readonly username: string;
+```
 
 - *Type:* `string`
 
@@ -1176,11 +1596,19 @@ const rdsServiceProps: RdsServiceProps = { ... }
 
 ##### `backupRetention`<sup>Optional</sup> <a name="hiii-construct-utils.RdsServiceProps.property.backupRetention"></a>
 
+```typescript
+public readonly backupRetention: Duration;
+```
+
 - *Type:* [`@aws-cdk/core.Duration`](#@aws-cdk/core.Duration)
 
 ---
 
 ##### `databaseName`<sup>Optional</sup> <a name="hiii-construct-utils.RdsServiceProps.property.databaseName"></a>
+
+```typescript
+public readonly databaseName: string;
+```
 
 - *Type:* `string`
 
@@ -1188,11 +1616,19 @@ const rdsServiceProps: RdsServiceProps = { ... }
 
 ##### `securityGroup`<sup>Optional</sup> <a name="hiii-construct-utils.RdsServiceProps.property.securityGroup"></a>
 
+```typescript
+public readonly securityGroup: ISecurityGroup[];
+```
+
 - *Type:* [`@aws-cdk/aws-ec2.ISecurityGroup`](#@aws-cdk/aws-ec2.ISecurityGroup)[]
 
 ---
 
 ##### `vpc`<sup>Optional</sup> <a name="hiii-construct-utils.RdsServiceProps.property.vpc"></a>
+
+```typescript
+public readonly vpc: IVpc;
+```
 
 - *Type:* [`@aws-cdk/aws-ec2.IVpc`](#@aws-cdk/aws-ec2.IVpc)
 
@@ -1210,6 +1646,10 @@ const route53Options: Route53Options = { ... }
 
 ##### `enableLoadBalancerAlias`<sup>Optional</sup> <a name="hiii-construct-utils.Route53Options.property.enableLoadBalancerAlias"></a>
 
+```typescript
+public readonly enableLoadBalancerAlias: boolean;
+```
+
 - *Type:* `boolean`
 - *Default:* true
 
@@ -1218,6 +1658,10 @@ Whether to configure the ALIAS for the LB.
 ---
 
 ##### `externalElbRecordName`<sup>Optional</sup> <a name="hiii-construct-utils.Route53Options.property.externalElbRecordName"></a>
+
+```typescript
+public readonly externalElbRecordName: string;
+```
 
 - *Type:* `string`
 - *Default:* external
@@ -1228,6 +1672,10 @@ the external ELB record name.
 
 ##### `internalElbRecordName`<sup>Optional</sup> <a name="hiii-construct-utils.Route53Options.property.internalElbRecordName"></a>
 
+```typescript
+public readonly internalElbRecordName: string;
+```
+
 - *Type:* `string`
 - *Default:* internal
 
@@ -1236,6 +1684,10 @@ the internal ELB record name.
 ---
 
 ##### `zoneName`<sup>Optional</sup> <a name="hiii-construct-utils.Route53Options.property.zoneName"></a>
+
+```typescript
+public readonly zoneName: string;
+```
 
 - *Type:* `string`
 - *Default:* svc.local
@@ -1256,17 +1708,29 @@ const s3ServiceProps: S3ServiceProps = { ... }
 
 ##### `accessLogBucket`<sup>Required</sup> <a name="hiii-construct-utils.S3ServiceProps.property.accessLogBucket"></a>
 
+```typescript
+public readonly accessLogBucket: boolean;
+```
+
 - *Type:* `boolean`
 
 ---
 
 ##### `bucketName`<sup>Required</sup> <a name="hiii-construct-utils.S3ServiceProps.property.bucketName"></a>
 
+```typescript
+public readonly bucketName: string;
+```
+
 - *Type:* `string`
 
 ---
 
 ##### `accessControl`<sup>Optional</sup> <a name="hiii-construct-utils.S3ServiceProps.property.accessControl"></a>
+
+```typescript
+public readonly accessControl: BucketAccessControl;
+```
 
 - *Type:* [`@aws-cdk/aws-s3.BucketAccessControl`](#@aws-cdk/aws-s3.BucketAccessControl)
 
@@ -1284,6 +1748,10 @@ const serviceScalingPolicy: ServiceScalingPolicy = { ... }
 
 ##### `maxCapacity`<sup>Optional</sup> <a name="hiii-construct-utils.ServiceScalingPolicy.property.maxCapacity"></a>
 
+```typescript
+public readonly maxCapacity: number;
+```
+
 - *Type:* `number`
 - *Default:* 10
 
@@ -1293,6 +1761,10 @@ max capacity for the service autoscaling.
 
 ##### `requestPerTarget`<sup>Optional</sup> <a name="hiii-construct-utils.ServiceScalingPolicy.property.requestPerTarget"></a>
 
+```typescript
+public readonly requestPerTarget: number;
+```
+
 - *Type:* `number`
 - *Default:* 1000
 
@@ -1301,6 +1773,10 @@ request per target.
 ---
 
 ##### `targetCpuUtilization`<sup>Optional</sup> <a name="hiii-construct-utils.ServiceScalingPolicy.property.targetCpuUtilization"></a>
+
+```typescript
+public readonly targetCpuUtilization: number;
+```
 
 - *Type:* `number`
 - *Default:* 50
