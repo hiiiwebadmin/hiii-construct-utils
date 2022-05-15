@@ -86,4 +86,4 @@ jobs:
           NPM_REGISTRY: registry.npmjs.org
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     container:
-      image: jsii/superchain:1-buster-slim
+      image: jsii/superchain
