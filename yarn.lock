@@ -1532,9 +1532,9 @@
   integrity sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==
 
 "@types/node@^12.20.0":
-  version "12.20.52"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.52.tgz#2fd2dc6bfa185601b15457398d4ba1ef27f81251"
-  integrity sha512-cfkwWw72849SNYp3Zx0IcIs25vABmFh73xicxhCkTcvtZQeIez15PpwQN8fY3RD7gv1Wrxlc9MEtfMORZDEsGw==
+  version "12.20.24"
+  resolved "https://registry.npmjs.org/@types/node/-/node-12.20.24.tgz"
+  integrity sha512-yxDeaQIAJlMav7fH5AQqPH1u8YIuhYJXYBzxaQ4PifsU0GDO38MSdmEDeRlIxrKbC6NbEaaEHDanWb+y30U8SQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.1"
@@ -4560,7 +4560,7 @@ js-tokens@^4.0.0:
 
 js-yaml@3.14.0:
   version "3.14.0"
-  resolved "https://registry.npmjs.org/js-yaml/-/js-yaml-3.14.0.tgz"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.0.tgz#a7a34170f26a21bb162424d8adacb4113a69e482"
   integrity sha512-/4IbIeHcD9VMHFqDR/gQ7EdZdLimOvW2DdcxFjdyyZ9NsbS+ccrXqVWDtab/lRl5AlUqmpBx8EhPaWR+OtY17A==
   dependencies:
     argparse "^1.0.7"
