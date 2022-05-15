@@ -49,7 +49,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/aws-efs',
     '@aws-cdk/aws-logs',
   ],
-  workflowContainerImage: 'jsii/superchain:node12',
+  workflowContainerImage: 'jsii/superchain:1-buster-slim',
   minNodeVersion: '12.20.0',
   keywords: [
     'cdk',
