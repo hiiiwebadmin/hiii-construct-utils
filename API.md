@@ -961,7 +961,7 @@ The security groups to associate with the Load Balancer.
 
 ##### `cert`<sup>Optional</sup> <a name="hiii-construct-utils.LaravelProps.property.cert"></a>
 
-- *Type:* [`@aws-cdk/aws-certificatemanager.ICertificate`](#@aws-cdk/aws-certificatemanager.ICertificate)
+- *Type:* [`@aws-cdk/aws-certificatemanager.ICertificate`](#@aws-cdk/aws-certificatemanager.ICertificate)[]
 
 This is the FargateTaskProps below.
 

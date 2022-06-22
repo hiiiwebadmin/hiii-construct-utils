@@ -52,7 +52,7 @@ export interface LaravelProps {
   *This is the FargateTaskProps below
   */
 
-  readonly cert?: acm.ICertificate;
+  readonly cert?: acm.ICertificate[];
 
   readonly healthCheckPath?: string;
   readonly healthCheckCode?: string;
@@ -171,8 +171,8 @@ export class LaravelService extends cdk.Construct {
       enableExecuteCommand: props.enableExecuteCommand,
       tasks: [
         {
-          forceHttps: props.cert != null,
-          external: props.cert ? { port: 443, certificate: [props.cert] } : { port: 80 },
+          forceHttps: props.cert != null && props.cert.length > 0,
+          external: props.cert != null && props.cert.length > 0 ? { port: 443, certificate: props.cert } : { port: 80 },
           deployType: props.deployType,
           task,
           healthCheck: {
