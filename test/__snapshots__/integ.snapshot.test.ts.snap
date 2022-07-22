@@ -506,6 +506,7 @@ Object {
       "Type": "AWS::EC2::SecurityGroup",
     },
     "rdsservicestackrdsserviceHiiiDBClusterSecret02AB9A6B3fdaad7efa858a3daf9490cf0a702aeb": Object {
+      "DeletionPolicy": "Delete",
       "Properties": Object {
         "Description": Object {
           "Fn::Join": Array [
@@ -526,6 +527,7 @@ Object {
         },
       },
       "Type": "AWS::SecretsManager::Secret",
+      "UpdateReplacePolicy": "Delete",
     },
   },
 }
@@ -684,6 +686,12 @@ Object {
         },
         "Port": 80,
         "Protocol": "HTTP",
+        "TargetGroupAttributes": Array [
+          Object {
+            "Key": "stickiness.enabled",
+            "Value": "false",
+          },
+        ],
         "TargetType": "ip",
         "VpcId": Object {
           "Ref": "laravelserviceVpc1CA47DE0",
